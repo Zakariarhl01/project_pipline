@@ -1,0 +1,563 @@
+2025-11-27 11:21:11,439 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:21:11,440 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:21:11,440 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:22:42,884 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:22:42,884 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:22:42,884 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:22:42,884 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:22:42,887 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:22:42,932 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:25:10,695 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:25:10,695 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:25:10,695 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:25:10,695 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:25:10,696 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:25:10,721 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:26:15,733 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:26:15,733 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:26:15,733 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:26:15,733 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:26:15,734 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:26:15,757 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:26:15,762 - INFO - Transform CSV : 62 lignes
+2025-11-27 11:26:15,762 - INFO - Quality check simple (aucune imputation)
+2025-11-27 11:26:55,312 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:26:55,312 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:26:55,312 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:26:55,312 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:26:55,313 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:26:55,336 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:26:55,339 - INFO - Transform CSV : 62 lignes
+2025-11-27 11:26:55,339 - INFO - Quality check simple (aucune imputation)
+2025-11-27 11:26:55,354 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 25, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedTable: relation "consolidated_measurements" does not exist
+LINE 1: INSERT INTO consolidated_measurements ("date","turbine_id","...
+                    ^
+
+2025-11-27 11:28:23,439 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:28:23,439 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:28:23,439 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:28:23,439 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:28:23,440 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:28:23,464 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:28:23,468 - INFO - Transform CSV : 62 lignes
+2025-11-27 11:28:23,468 - INFO - Quality check simple (aucune imputation)
+2025-11-27 11:28:23,493 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 44, in insert_measurements
+    execute_values(cur, sql_insert, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedColumn: column "energie_kWh" of relation "consolidated_measurements" does not exist
+LINE 1: ...TO consolidated_measurements ("date","turbine_id","energie_k...
+                                                             ^
+
+2025-11-27 11:29:26,223 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:29:26,224 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:29:26,224 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:29:26,224 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:29:26,225 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:29:26,249 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:29:26,253 - INFO - Transform CSV : 62 lignes
+2025-11-27 11:29:26,253 - INFO - Quality check simple (aucune imputation)
+2025-11-27 11:29:26,268 - INFO - 62 lignes insérées dans consolidated_measurements
+2025-11-27 11:29:26,268 - INFO - Résumé pipeline simple : {'timestamp': '2025-11-27T11:29:26.268530', 'csv_rows': 62, 'sensor_rows': 0, 'inserted_rows': 62, 'quality_events': 0}
+2025-11-27 11:51:44,255 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:51:44,256 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:51:44,256 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:51:44,256 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:51:44,258 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:51:44,291 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:51:44,471 - INFO - Météo récupérée — status 200
+2025-11-27 11:51:44,473 - INFO - 0 lignes météo extraites depuis l'API
+2025-11-27 11:53:33,151 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:53:33,151 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:53:33,151 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:53:33,151 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:53:33,152 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:53:33,177 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:53:33,336 - INFO - Météo récupérée — status 200
+2025-11-27 11:53:33,337 - INFO - 0 lignes météo extraites depuis l'API
+2025-11-27 11:53:33,343 - INFO - Transform CSV : 62 lignes
+2025-11-27 11:53:33,343 - INFO - Quality check simple (aucune imputation)
+2025-11-27 11:53:33,357 - INFO - 62 lignes insérées dans consolidated_measurements
+2025-11-27 11:53:33,358 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T11:53:33.358078', 'csv_rows': 62, 'sensor_rows': 0, 'api_rows': 0, 'inserted_rows': 62, 'quality_events': 0}
+2025-11-27 11:59:20,788 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 11:59:20,788 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 11:59:20,788 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 11:59:20,789 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 11:59:20,791 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 11:59:20,825 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 11:59:20,982 - INFO - Météo récupérée — status 200
+2025-11-27 12:03:37,887 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:03:37,888 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:03:37,888 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:03:37,888 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:03:37,891 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:03:37,926 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:03:38,069 - INFO - Météo récupérée — status 200
+2025-11-27 12:04:42,903 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:04:42,903 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:04:42,903 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:04:42,903 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:04:42,904 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:04:42,929 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:04:43,070 - INFO - Météo récupérée — status 200
+2025-11-27 12:04:43,076 - INFO - Transform CSV : 62 lignes
+2025-11-27 12:05:38,395 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:05:38,395 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:05:38,395 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:05:38,395 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:05:38,396 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:05:38,419 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:05:38,582 - INFO - Météo récupérée — status 200
+2025-11-27 12:05:38,588 - INFO - Transform CSV : 62 lignes
+2025-11-27 12:06:14,285 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:06:14,285 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:06:14,285 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:06:14,285 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:06:14,286 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:06:14,312 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:06:14,454 - INFO - Météo récupérée — status 200
+2025-11-27 12:06:14,458 - INFO - Transform CSV : 62 lignes
+2025-11-27 12:06:14,461 - INFO - Transform API météo : 168 lignes
+2025-11-27 12:06:14,461 - INFO - Quality check simple (aucune imputation)
+2025-11-27 12:06:14,472 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 40, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedColumn: column "energie_kWh" of relation "consolidated_measurements" does not exist
+LINE 2: ...TO consolidated_measurements ("date","turbine_id","energie_k...
+                                                             ^
+
+2025-11-27 12:10:13,807 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:10:13,807 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:10:13,807 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:10:13,808 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:10:13,810 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:10:13,840 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:10:13,986 - INFO - Météo récupérée — status 200
+2025-11-27 12:10:13,992 - INFO - Transform CSV : 62 lignes
+2025-11-27 12:10:13,995 - INFO - Transform API météo : 168 lignes
+2025-11-27 12:10:13,995 - INFO - Quality check simple (aucune imputation)
+2025-11-27 12:10:14,013 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 40, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+2025-11-27 12:10:45,432 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:10:45,432 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:10:45,432 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:10:45,432 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:10:45,433 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:10:45,458 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:10:45,600 - INFO - Météo récupérée — status 200
+2025-11-27 12:10:45,606 - INFO - Transform CSV : 62 lignes
+2025-11-27 12:10:45,609 - INFO - Transform API météo : 168 lignes
+2025-11-27 12:10:45,609 - INFO - Quality check simple (aucune imputation)
+2025-11-27 12:10:45,626 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 40, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+2025-11-27 12:11:43,947 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 12:11:43,947 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 12:11:43,947 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 12:11:43,947 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 12:11:43,948 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 12:11:43,972 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 32, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 12:11:44,154 - INFO - Météo récupérée — status 200
+2025-11-27 12:11:44,163 - INFO - Transform CSV : 62 lignes
+2025-11-27 12:11:44,167 - INFO - Transform API météo : 168 lignes
+2025-11-27 12:11:44,167 - INFO - Quality check simple (aucune imputation)
+2025-11-27 12:11:44,190 - INFO - 230 lignes insérées dans consolidated_measurements
+2025-11-27 12:11:44,190 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T12:11:44.190305', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 168, 'inserted_rows': 230, 'quality_events': 0}
+2025-11-27 13:12:53,704 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:12:53,704 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:12:53,704 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:12:53,704 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:12:53,707 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:12:53,739 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 23, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:12:53,942 - INFO - Météo récupérée — status 200
+2025-11-27 13:12:53,953 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:12:53,957 - INFO - Transform API météo : 168 lignes
+2025-11-27 13:12:53,957 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:12:53,978 - INFO - 230 lignes insérées dans consolidated_measurements
+2025-11-27 13:12:53,979 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T13:12:53.979104', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 168, 'inserted_rows': 230, 'quality_events': 0}
+2025-11-27 13:21:05,095 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:21:05,095 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:21:05,095 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:21:05,095 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:21:05,098 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:21:05,131 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 23, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:21:05,296 - INFO - Météo récupérée — status 200
+2025-11-27 13:21:05,302 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:21:05,302 - INFO - Transform API météo : 0 lignes
+2025-11-27 13:21:05,302 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:21:05,318 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 34, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.InvalidColumnReference: there is no unique or exclusion constraint matching the ON CONFLICT specification
+
+2025-11-27 13:23:33,994 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:23:33,994 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:23:33,994 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:23:33,994 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:23:33,995 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:23:34,021 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 23, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:23:34,164 - INFO - Météo récupérée — status 200
+2025-11-27 13:23:34,170 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:23:34,170 - INFO - Transform API météo : 0 lignes
+2025-11-27 13:23:34,170 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:23:34,188 - INFO - 62 lignes insérées dans consolidated_measurements
+2025-11-27 13:23:34,189 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T13:23:34.189000', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 0, 'inserted_rows': 62, 'quality_events': 0}
+2025-11-27 13:24:26,273 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:24:26,273 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:24:26,273 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:24:26,274 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:24:26,274 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:24:26,299 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 23, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:24:26,441 - INFO - Météo récupérée — status 200
+2025-11-27 13:24:26,446 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:24:26,446 - INFO - Transform API météo : 0 lignes
+2025-11-27 13:24:26,446 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:24:26,446 - INFO - Après déduplication : 31 lignes à insérer
+2025-11-27 13:24:26,462 - INFO - 31 lignes insérées dans consolidated_measurements
+2025-11-27 13:24:26,462 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T13:24:26.462391', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 0, 'inserted_rows': 31, 'quality_events': 0}
+2025-11-27 13:37:36,278 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:37:36,279 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:37:36,279 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:37:36,279 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:37:36,282 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:37:36,315 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 40, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:37:36,495 - INFO - Météo récupérée — status 200
+2025-11-27 13:37:36,503 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:37:36,503 - INFO - Transform API météo : 0 lignes
+2025-11-27 13:37:36,503 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:37:36,503 - INFO - Après déduplication : 31 lignes à insérer
+2025-11-27 13:37:36,523 - INFO - 31 lignes insérées dans consolidated_measurements
+2025-11-27 13:37:36,523 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T13:37:36.523535', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 0, 'inserted_rows': 31, 'quality_events': 0}
+2025-11-27 13:40:29,621 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:40:29,621 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:40:29,621 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:40:29,621 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:40:29,622 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:40:29,645 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 40, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:40:29,796 - INFO - Météo récupérée — status 200
+2025-11-27 13:40:29,802 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:40:29,802 - INFO - Transform API météo : 0 lignes
+2025-11-27 13:40:29,802 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:40:29,802 - INFO - Après déduplication : 31 lignes à insérer
+2025-11-27 13:40:29,821 - INFO - 31 lignes insérées dans consolidated_measurements
+2025-11-27 13:40:29,821 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T13:40:29.821235', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 0, 'inserted_rows': 31, 'quality_events': 0}
+2025-11-27 13:41:28,305 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:41:28,306 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:41:28,306 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:41:28,306 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:41:28,307 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:41:28,332 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 40, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:41:28,474 - INFO - Météo récupérée — status 200
+2025-11-27 13:41:28,480 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:41:28,483 - INFO - Transform API météo : 168 lignes
+2025-11-27 13:41:28,483 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:41:28,483 - INFO - Après déduplication : 230 lignes à insérer
+2025-11-27 13:41:28,498 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/load.py", line 47, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedColumn: column "energie_kWh" of relation "consolidated_measurements" does not exist
+LINE 2: ...TO consolidated_measurements ("date","turbine_id","energie_k...
+                                                             ^
+
+2025-11-27 13:42:16,484 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 13:42:16,485 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 13:42:16,485 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 13:42:16,485 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 13:42:16,486 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 13:42:16,510 - ERROR - Erreur lors de l'extraction depuis la DB interne
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/extract_db.py", line 40, in fetch_last_24h
+    cur.execute(query, (f'{lookback_minutes} minutes',))
+  File "/Users/kwnzax/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 236, in execute
+    return super().execute(query, vars)
+psycopg2.errors.UndefinedColumn: column "timestamp" does not exist
+LINE 3:     WHERE timestamp >= (now() at time zone 'Europe/Paris') -...
+                  ^
+
+2025-11-27 13:42:16,653 - INFO - Météo récupérée — status 200
+2025-11-27 13:42:16,659 - INFO - Transform CSV : 62 lignes
+2025-11-27 13:42:16,662 - INFO - Transform API météo : 168 lignes
+2025-11-27 13:42:16,662 - INFO - Quality check simple (aucune imputation)
+2025-11-27 13:42:16,662 - INFO - Après déduplication : 230 lignes à insérer
+2025-11-27 13:42:16,688 - INFO - 230 lignes insérées dans consolidated_measurements
+2025-11-27 13:42:16,688 - INFO - Résumé pipeline complet : {'timestamp': '2025-11-27T13:42:16.688217', 'csv_rows': 62, 'sensor_rows': 0, 'weather_rows': 168, 'inserted_rows': 230, 'quality_events': 0}
+2025-11-27 14:13:16,789 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 14:13:16,789 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 14:13:16,790 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 14:13:16,790 - INFO - Démarrage du pipeline ETL.
+2025-11-27 14:13:16,790 - INFO - -> Extraction du CSV (Production)
+2025-11-27 14:13:16,790 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 14:13:16,790 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-11-27 14:13:16,792 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 14:13:16,795 - INFO - -> Extraction des capteurs depuis DB
+2025-11-27 14:13:17,224 - INFO - 102092 mesures extraites depuis la base interne
+2025-11-27 14:13:18,137 - INFO - -> Extraction météo depuis l'API
+2025-11-27 14:13:18,308 - INFO - Météo récupérée — status 200
+2025-11-27 14:13:18,315 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-11-27 14:13:18,315 - INFO - -> Transformation et contrôle qualité des données
+2025-11-27 14:13:18,316 - INFO - Total lignes brutes combinées : 102490
+2025-11-27 14:13:18,327 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-11-27 14:13:18,327 - ERROR - Erreur FATALE dans le pipeline.
+Traceback (most recent call last):
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/main_pipeline.py", line 201, in <module>
+    run()
+  File "/Users/kwnzax/Documents/Projet_Collecte_Donnees_IA/scripts/main_pipeline.py", line 174, in run
+    nb_anomalies = len(events)
+TypeError: object of type 'int' has no len()
+2025-11-27 14:14:49,181 - INFO - Démarrage du pipeline ETL.
+2025-11-27 14:14:49,181 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-11-27 14:14:49,181 - INFO - Dossier créé ou déjà existant : ./data/
+2025-11-27 14:14:49,181 - INFO - Dossier créé ou déjà existant : ./logs
+2025-11-27 14:14:49,181 - INFO - -> Extraction du CSV (Production)
+2025-11-27 14:14:49,182 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-11-27 14:14:49,182 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-11-27 14:14:49,184 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-11-27 14:14:49,186 - INFO - -> Extraction des capteurs depuis DB
+2025-11-27 14:14:49,614 - INFO - 102090 mesures extraites depuis la base interne
+2025-11-27 14:14:50,529 - INFO - Turbines actives détectées : T002, T001
+2025-11-27 14:14:50,529 - INFO - -> Extraction météo depuis l'API
+2025-11-27 14:14:50,669 - INFO - Météo récupérée — status 200
+2025-11-27 14:14:50,677 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-11-27 14:14:50,677 - INFO - -> Transformation et contrôle qualité des données
+2025-11-27 14:14:50,678 - INFO - Total lignes brutes combinées : 102488
+2025-11-27 14:14:50,689 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-11-27 14:14:50,689 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-11-27 14:14:50,689 - INFO - -> Chargement en base PostgreSQL
+2025-11-27 14:14:50,717 - INFO - Après déduplication : 102152 lignes à insérer
+2025-11-27 14:14:55,312 - INFO - 102152 lignes insérées dans consolidated_measurements
+2025-11-27 14:14:55,334 - INFO - Rapport d'exécution final : {'timestamp': '2025-11-27T14:14:55.334175', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 102090, 'weather_rows_creees': 336, 'inserted_rows': 102152, 'anomalies_corrigees': 0}

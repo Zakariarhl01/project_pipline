@@ -8,15 +8,37 @@ def insert_measurements(conn_params, table, rows, batch_size=500):
     if not rows:
         logger.info("Aucune donnée à insérer.")
         return 0
-    
-    cols = list(rows[0].key())
+
+    # --- Déduplication automatique sur (turbine_id, date) ---
+    seen = set()
+    deduped_rows = []
+    for r in rows:
+        key = (r.get("turbine_id"), r.get("date"))
+        if key not in seen:
+            seen.add(key)
+            deduped_rows.append(r)
+    rows = deduped_rows
+    logger.info(f"Après déduplication : {len(rows)} lignes à insérer")
+
+    cols = list(rows[0].keys())
     values = [[row[col] for col in cols] for row in rows]
 
     col_names = ",".join(f'"{c}"' for c in cols)
-    sql = f'INSERT INTO {table} ({col_names}) VALUES %s'
+
+    # Upsert selon turbine_id + date
+    sql = f"""
+    INSERT INTO {table} ({col_names}) VALUES %s
+    ON CONFLICT (turbine_id, date) DO UPDATE SET
+      energie_kwh = EXCLUDED.energie_kwh,
+      temperature_k = EXCLUDED.temperature_k,
+      wind_ms = EXCLUDED.wind_ms,
+      arret_planifie = EXCLUDED.arret_planifie,
+      arret_non_planifie = EXCLUDED.arret_non_planifie,
+      source = EXCLUDED.source
+    """
 
     inserted = 0
-
+    
     try:
         with psycopg2.connect(**conn_params) as conn:
             with conn.cursor() as cur:
@@ -24,10 +46,10 @@ def insert_measurements(conn_params, table, rows, batch_size=500):
                     batch = values[i:i+batch_size]
                     execute_values(cur, sql, batch)
                     inserted += len(batch)
-      
+
         logger.info(f"{inserted} lignes insérées dans {table}")
         return inserted
-
+    
     except Exception:
         logger.exception("Erreur lors de l'insertion")
         raise
