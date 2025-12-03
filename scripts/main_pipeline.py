@@ -17,6 +17,7 @@ import logging.handlers # Pour la gestion de la rotation des fichiers de log
 from pathlib import Path
 from datetime import datetime
 import sys # Pour les logs dans la console
+import shutil
 
 import yaml
 import pandas as pd
@@ -28,7 +29,7 @@ from transform import (
     transform_production_rows,
     transform_sensor_rows,
     transform_api_rows,
-    quality_check # Le nom correct de la fonction de qualité
+    quality_check 
 )
 from load import insert_measurements
 
@@ -199,7 +200,21 @@ def run():
     # Log du rapport final
     logger.info(f"Rapport d'exécution final : {summary}")
 
-
+# Affichage du rapport final dans la console
+    print("\n--- Pipeline terminé ---")
+    print(f"Rapport d'exécution:\n{yaml.dump(summary, indent=2)}")
+    
+    # Log du rapport final
+    logger.info(f"Rapport d'exécution final : {summary}")
+    
+    # 8) Nettoyage des fichiers temporaires (Sécurité)
+    try:
+        # Suppression récursive et sécurisée du répertoire temporaire
+        shutil.rmtree(cfg["paths"]["tmp_dir"])
+        logger.info(f"Nettoyage sécurisé du dossier temporaire: {cfg['paths']['tmp_dir']}")
+    except OSError as e:
+        # Utilisation de warning, car c'est un problème non fatal pour le chargement
+        logger.warning(f"Impossible de supprimer le dossier temporaire {cfg['paths']['tmp_dir']}: {e}")
 # -----------------------
 # POINT D’ENTRÉE
 # -----------------------

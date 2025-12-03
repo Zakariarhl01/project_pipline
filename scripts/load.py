@@ -10,15 +10,15 @@ def insert_measurements(conn_params, table, rows, batch_size=500):
         return 0
 
     # --- Déduplication automatique sur (turbine_id, date) ---
-    seen = set()
-    deduped_rows = []
-    for r in rows:
-        key = (r.get("turbine_id"), r.get("date"))
-        if key not in seen:
-            seen.add(key)
-            deduped_rows.append(r)
-    rows = deduped_rows
-    logger.info(f"Après déduplication : {len(rows)} lignes à insérer")
+    # seen = set()
+    # deduped_rows = []
+    # for r in rows:
+    #     key = (r.get("turbine_id"), r.get("date"))
+    #     if key not in seen:
+    #         seen.add(key)
+    #         deduped_rows.append(r)
+    # rows = deduped_rows
+    # logger.info(f"Après déduplication : {len(rows)} lignes à insérer")
 
     cols = list(rows[0].keys())
     values = [[row[col] for col in cols] for row in rows]
@@ -29,12 +29,14 @@ def insert_measurements(conn_params, table, rows, batch_size=500):
     sql = f"""
     INSERT INTO {table} ({col_names}) VALUES %s
     ON CONFLICT (turbine_id, date) DO UPDATE SET
-      energie_kwh = EXCLUDED.energie_kwh,
-      temperature_k = EXCLUDED.temperature_k,
-      wind_ms = EXCLUDED.wind_ms,
-      arret_planifie = EXCLUDED.arret_planifie,
-      arret_non_planifie = EXCLUDED.arret_non_planifie,
-      source = EXCLUDED.source
+      energie_kwh = COALESCE(EXCLUDED.energie_kwh, consolidated_measurements.energie_kwh),
+      temperature_k = COALESCE(EXCLUDED.temperature_k, consolidated_measurements.temperature_k),
+      wind_ms = COALESCE(EXCLUDED.wind_ms, consolidated_measurements.wind_ms),
+      vibration_mm_s = COALESCE(EXCLUDED.vibration_mm_s, consolidated_measurements.vibration_mm_s),
+      consumption_kwh = COALESCE(EXCLUDED.consumption_kwh, consolidated_measurements.consumption_kwh),
+      arret_planifie = COALESCE(EXCLUDED.arret_planifie, consolidated_measurements.arret_planifie),
+      arret_non_planifie = COALESCE(EXCLUDED.arret_non_planifie, consolidated_measurements.arret_non_planifie),
+      source = EXCLUDED.source -- La source DOIT refléter le dernier écrivain (Météo/Capteur/CSV)
     """
 
     inserted = 0

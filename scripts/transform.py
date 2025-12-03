@@ -5,7 +5,7 @@ import logging
 from datetime import datetime
 import pytz
 import math
-import pandas as pd # Nécessaire pour vérifier pd.isna
+import pandas as pd 
 
 logger = logging.getLogger(__name__)
 PARIS = pytz.timezone("Europe/Paris")
@@ -40,6 +40,7 @@ def parse_date(date_obj):
     else:
         # Cas CSV/API (string)
         dt = None
+        # Formats pour les données CSV et API
         formats = ["%Y-%m-%d %H:%M:%S", "%Y-%m-%d %H:%M", "%Y-%m-%d", "%Y-%m-%dT%H:%M"]
         for f in formats:
             try:
@@ -48,17 +49,21 @@ def parse_date(date_obj):
             except ValueError:
                 continue
         
-        # Essai ISO format direct
-        if not dt:
+        if dt is None:
             try:
-                dt = datetime.fromisoformat(str(date_obj))
-            except:
+                 dt = datetime.fromisoformat(str(date_obj))
+            except ValueError:
+                logger.error(f"Format de date non reconnu : {date_obj}")
                 return None
 
-    # Ajout Timezone si manquant
-    if dt.tzinfo is None:
-        dt = PARIS.localize(dt)
+    if dt.tzinfo is None or dt.tzinfo.utcoffset(dt) is None:
+
+        dt = pytz.utc.localize(dt)
+        
+    dt = dt.astimezone(PARIS)
     
+    dt = dt.replace(second=0, microsecond=0) 
+
     return dt.isoformat()
 
 # --- TRANSFORMATIONS ---
@@ -70,7 +75,7 @@ def transform_production_rows(rows):
             "date": parse_date(r.get("date")),
             "turbine_id": r.get("turbin_id") or r.get("turbine_id"), 
             "energie_kwh": float(r["energie_kWh"]) if r.get("energie_kWh") not in (None, "") else None,
-            # Utilisation de la fonction safe_bool_int corrigée
+            
             "arret_planifie": safe_bool_int(r.get("arret_planifie")),
             "arret_non_planifie": safe_bool_int(r.get("arret_non_planifie")),
             "temperature_k": None,
@@ -90,7 +95,7 @@ def transform_sensor_rows(rows):
             "date": parse_date(raw_date),
             "turbine_id": r.get("turbine_id"),
             "temperature_k": None, 
-            "wind_ms": float(r.get("value")) if r.get("value") else None, # Hypothèse: capteur vent
+            "wind_ms": float(r.get("value")) if r.get("value") else None,
             "energie_kwh": None,
             "arret_planifie": False,
             "arret_non_planifie": False,
@@ -145,7 +150,8 @@ def quality_check(records):
         
         # Filtre Vent (Max 150 km/h = ~42 m/s)
         if r["wind_ms"] is not None:
-            if r["wind_ms"] < 0 or r["wind_ms"] > 50: 
+            # CHANGEMENT: 50 -> 42 pour se conformer au seuil de 150km/h du sujet
+            if r["wind_ms"] < 0 or r["wind_ms"] > 42: 
                 r["wind_ms"] = None 
                 anomalies += 1
         

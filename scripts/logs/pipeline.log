@@ -561,3 +561,164 @@ TypeError: object of type 'int' has no len()
 2025-11-27 14:14:50,717 - INFO - Après déduplication : 102152 lignes à insérer
 2025-11-27 14:14:55,312 - INFO - 102152 lignes insérées dans consolidated_measurements
 2025-11-27 14:14:55,334 - INFO - Rapport d'exécution final : {'timestamp': '2025-11-27T14:14:55.334175', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 102090, 'weather_rows_creees': 336, 'inserted_rows': 102152, 'anomalies_corrigees': 0}
+2025-12-01 18:20:39,347 - INFO - Démarrage du pipeline ETL.
+2025-12-01 18:20:39,348 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-01 18:20:39,348 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-01 18:20:39,348 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-01 18:20:39,348 - INFO - -> Extraction du CSV (Production)
+2025-12-01 18:20:39,348 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-01 18:20:39,348 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-01 18:20:39,349 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-01 18:20:39,351 - INFO - -> Extraction des capteurs depuis DB
+2025-12-01 18:20:39,610 - INFO - 90078 mesures extraites depuis la base interne
+2025-12-01 18:20:40,168 - INFO - Turbines actives détectées : T001, T002
+2025-12-01 18:20:40,168 - INFO - -> Extraction météo depuis l'API
+2025-12-01 18:20:40,310 - INFO - Météo récupérée — status 200
+2025-12-01 18:20:40,316 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-01 18:20:40,316 - INFO - -> Transformation et contrôle qualité des données
+2025-12-01 18:20:40,317 - INFO - Total lignes brutes combinées : 90476
+2025-12-01 18:20:40,324 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-01 18:20:40,324 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-01 18:20:40,324 - INFO - -> Chargement en base PostgreSQL
+2025-12-01 18:20:40,345 - INFO - Après déduplication : 90140 lignes à insérer
+2025-12-01 18:20:42,860 - INFO - 90140 lignes insérées dans consolidated_measurements
+2025-12-01 18:20:42,884 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-01T18:20:42.883839', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 90078, 'weather_rows_creees': 336, 'inserted_rows': 90140, 'anomalies_corrigees': 0}
+2025-12-01 18:24:05,499 - INFO - Démarrage du pipeline ETL.
+2025-12-01 18:24:05,500 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-01 18:24:05,500 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-01 18:24:05,500 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-01 18:24:05,500 - INFO - -> Extraction du CSV (Production)
+2025-12-01 18:24:05,500 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-01 18:24:05,500 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-01 18:24:05,501 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-01 18:24:05,503 - INFO - -> Extraction des capteurs depuis DB
+2025-12-01 18:24:05,792 - INFO - 90070 mesures extraites depuis la base interne
+2025-12-01 18:24:06,362 - INFO - Turbines actives détectées : T002, T001
+2025-12-01 18:24:06,362 - INFO - -> Extraction météo depuis l'API
+2025-12-01 18:24:06,498 - INFO - Météo récupérée — status 200
+2025-12-01 18:24:06,504 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-01 18:24:06,504 - INFO - -> Transformation et contrôle qualité des données
+2025-12-01 18:24:06,505 - INFO - Total lignes brutes combinées : 90468
+2025-12-01 18:24:06,512 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-01 18:24:06,512 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-01 18:24:06,512 - INFO - -> Chargement en base PostgreSQL
+2025-12-01 18:24:06,533 - INFO - Après déduplication : 90132 lignes à insérer
+2025-12-01 18:24:09,790 - INFO - 90132 lignes insérées dans consolidated_measurements
+2025-12-01 18:24:09,816 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-01T18:24:09.815579', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 90070, 'weather_rows_creees': 336, 'inserted_rows': 90132, 'anomalies_corrigees': 0}
+2025-12-03 09:12:37,909 - INFO - Démarrage du pipeline ETL.
+2025-12-03 09:12:37,909 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 09:12:37,909 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 09:12:37,909 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 09:12:37,909 - INFO - -> Extraction du CSV (Production)
+2025-12-03 09:12:37,910 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 09:12:37,910 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 09:12:37,912 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 09:12:37,914 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 09:12:38,192 - INFO - 85414 mesures extraites depuis la base interne
+2025-12-03 09:12:38,740 - INFO - Turbines actives détectées : T002, T001
+2025-12-03 09:12:38,740 - INFO - -> Extraction météo depuis l'API
+2025-12-03 09:12:38,939 - INFO - Météo récupérée — status 200
+2025-12-03 09:12:38,946 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 09:12:38,946 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 09:12:38,949 - INFO - Total lignes brutes combinées : 85812
+2025-12-03 09:12:38,956 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:12:38,956 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:12:38,956 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 09:12:38,977 - INFO - Après déduplication : 85476 lignes à insérer
+2025-12-03 09:12:42,360 - INFO - 85476 lignes insérées dans consolidated_measurements
+2025-12-03 09:12:42,384 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:12:42.383879', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85414, 'weather_rows_creees': 336, 'inserted_rows': 85476, 'anomalies_corrigees': 0}
+2025-12-03 09:28:55,534 - INFO - Démarrage du pipeline ETL.
+2025-12-03 09:28:55,535 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 09:28:55,535 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 09:28:55,535 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 09:28:55,535 - INFO - -> Extraction du CSV (Production)
+2025-12-03 09:28:55,535 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 09:28:55,535 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 09:28:55,536 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 09:28:55,538 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 09:28:55,787 - INFO - 85382 mesures extraites depuis la base interne
+2025-12-03 09:28:56,310 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 09:28:56,310 - INFO - -> Extraction météo depuis l'API
+2025-12-03 09:28:56,470 - INFO - Météo récupérée — status 200
+2025-12-03 09:28:56,474 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 09:28:56,474 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 09:28:56,475 - INFO - Total lignes brutes combinées : 85780
+2025-12-03 09:28:56,480 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:28:56,480 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:28:56,480 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 09:28:56,497 - INFO - Après déduplication : 85444 lignes à insérer
+2025-12-03 09:29:00,057 - INFO - 85444 lignes insérées dans consolidated_measurements
+2025-12-03 09:29:00,080 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:29:00.080002', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85382, 'weather_rows_creees': 336, 'inserted_rows': 85444, 'anomalies_corrigees': 0}
+2025-12-03 09:29:00,081 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:29:00.080002', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85382, 'weather_rows_creees': 336, 'inserted_rows': 85444, 'anomalies_corrigees': 0}
+2025-12-03 09:29:00,081 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-03 09:37:25,354 - INFO - Démarrage du pipeline ETL.
+2025-12-03 09:37:25,354 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 09:37:25,354 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 09:37:25,354 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 09:37:25,354 - INFO - -> Extraction du CSV (Production)
+2025-12-03 09:37:25,355 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 09:37:25,355 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 09:37:25,355 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 09:37:25,357 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 09:37:25,611 - INFO - 85364 mesures extraites depuis la base interne
+2025-12-03 09:37:25,864 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 09:37:25,864 - INFO - -> Extraction météo depuis l'API
+2025-12-03 09:37:26,023 - INFO - Météo récupérée — status 200
+2025-12-03 09:37:26,026 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 09:37:26,026 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 09:37:26,027 - INFO - Total lignes brutes combinées : 85762
+2025-12-03 09:37:26,032 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:37:26,032 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:37:26,032 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 09:37:26,050 - INFO - Après déduplication : 85426 lignes à insérer
+2025-12-03 09:37:29,555 - INFO - 85426 lignes insérées dans consolidated_measurements
+2025-12-03 09:37:29,579 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:37:29.578785', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85364, 'weather_rows_creees': 336, 'inserted_rows': 85426, 'anomalies_corrigees': 0}
+2025-12-03 09:37:29,579 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:37:29.578785', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85364, 'weather_rows_creees': 336, 'inserted_rows': 85426, 'anomalies_corrigees': 0}
+2025-12-03 09:37:29,580 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-03 09:42:19,700 - INFO - Démarrage du pipeline ETL.
+2025-12-03 09:42:19,701 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 09:42:19,701 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 09:42:19,701 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 09:42:19,701 - INFO - -> Extraction du CSV (Production)
+2025-12-03 09:42:19,702 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 09:42:19,702 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 09:42:19,702 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 09:42:19,704 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 09:42:19,979 - INFO - 85354 mesures extraites depuis la base interne
+2025-12-03 09:42:20,226 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 09:42:20,226 - INFO - -> Extraction météo depuis l'API
+2025-12-03 09:42:20,369 - INFO - Météo récupérée — status 200
+2025-12-03 09:42:20,372 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 09:42:20,372 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 09:42:20,373 - INFO - Total lignes brutes combinées : 85752
+2025-12-03 09:42:20,377 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:42:20,378 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:42:20,378 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 09:42:20,393 - INFO - Après déduplication : 85416 lignes à insérer
+2025-12-03 09:42:23,775 - INFO - 85416 lignes insérées dans consolidated_measurements
+2025-12-03 09:42:23,795 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:42:23.794943', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85354, 'weather_rows_creees': 336, 'inserted_rows': 85416, 'anomalies_corrigees': 0}
+2025-12-03 09:42:23,796 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:42:23.794943', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85354, 'weather_rows_creees': 336, 'inserted_rows': 85416, 'anomalies_corrigees': 0}
+2025-12-03 09:42:23,796 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-03 09:46:18,869 - INFO - Démarrage du pipeline ETL.
+2025-12-03 09:46:18,869 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 09:46:18,869 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 09:46:18,869 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 09:46:18,869 - INFO - -> Extraction du CSV (Production)
+2025-12-03 09:46:18,870 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 09:46:18,870 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 09:46:18,870 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 09:46:18,872 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 09:46:19,119 - INFO - 85346 mesures extraites depuis la base interne
+2025-12-03 09:46:19,364 - INFO - Turbines actives détectées : T002, T001
+2025-12-03 09:46:19,364 - INFO - -> Extraction météo depuis l'API
+2025-12-03 09:46:19,539 - INFO - Météo récupérée — status 200
+2025-12-03 09:46:19,545 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 09:46:19,545 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 09:46:19,546 - INFO - Total lignes brutes combinées : 85744
+2025-12-03 09:46:19,554 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:46:19,554 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 09:46:19,554 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 09:46:22,708 - INFO - 85744 lignes insérées dans consolidated_measurements
+2025-12-03 09:46:22,711 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:46:22.711305', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85346, 'weather_rows_creees': 336, 'inserted_rows': 85744, 'anomalies_corrigees': 0}
+2025-12-03 09:46:22,712 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:46:22.711305', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85346, 'weather_rows_creees': 336, 'inserted_rows': 85744, 'anomalies_corrigees': 0}
+2025-12-03 09:46:22,712 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline

@@ -2,7 +2,7 @@
 postgres:
   host: localhost
   port: 5432
-  dbname: donne_meteo
+  dbname: donnee_meteo
   user: postgres           
   password: 12345
 
