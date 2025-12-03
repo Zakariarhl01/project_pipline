@@ -10,8 +10,7 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 def fetch_last_24h(conn_params, lookback_minutes=1440):
-    
-    # CORRECTION : Utilisation de "ts_utc" qui est le nom réel de la colonne
+
     query = """
     SELECT 
         turbine_id, 
@@ -23,8 +22,7 @@ def fetch_last_24h(conn_params, lookback_minutes=1440):
     FROM raw_measurements
     WHERE ts_utc >= (now() at time zone 'UTC') - interval %s
     """
-    # NOTE: On utilise 'UTC' car ts_utc est 'timestamp without time zone', 
-    # donc on suppose qu'il est stocké en UTC.
+    
 
     try:
         with psycopg2.connect(**conn_params) as conn:

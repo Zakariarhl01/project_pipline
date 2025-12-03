@@ -8,17 +8,7 @@ def insert_measurements(conn_params, table, rows, batch_size=500):
     if not rows:
         logger.info("Aucune donnée à insérer.")
         return 0
-
-    # --- Déduplication automatique sur (turbine_id, date) ---
-    # seen = set()
-    # deduped_rows = []
-    # for r in rows:
-    #     key = (r.get("turbine_id"), r.get("date"))
-    #     if key not in seen:
-    #         seen.add(key)
-    #         deduped_rows.append(r)
-    # rows = deduped_rows
-    # logger.info(f"Après déduplication : {len(rows)} lignes à insérer")
+    
 
     cols = list(rows[0].keys())
     values = [[row[col] for col in cols] for row in rows]

@@ -1,10 +1,11 @@
-# Exemple de configuration. Crée un fichier config.yaml à partir de celui-ci
+
 postgres:
   host: localhost
   port: 5432
   dbname: donnee_meteo
   user: postgres           
   password: 12345
+  sslmode: prefer
 
 api:
   weather:

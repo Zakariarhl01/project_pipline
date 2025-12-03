@@ -722,3 +722,189 @@ TypeError: object of type 'int' has no len()
 2025-12-03 09:46:22,711 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:46:22.711305', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85346, 'weather_rows_creees': 336, 'inserted_rows': 85744, 'anomalies_corrigees': 0}
 2025-12-03 09:46:22,712 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T09:46:22.711305', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 85346, 'weather_rows_creees': 336, 'inserted_rows': 85744, 'anomalies_corrigees': 0}
 2025-12-03 09:46:22,712 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-03 11:34:08,560 - INFO - Démarrage du pipeline ETL.
+2025-12-03 11:34:08,560 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 11:34:08,560 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 11:34:08,560 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 11:34:08,560 - INFO - -> Extraction du CSV (Production)
+2025-12-03 11:34:08,561 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 11:34:08,561 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 11:34:08,563 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 11:34:08,565 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 11:34:08,578 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 11:34:08,578 - INFO - Turbines actives détectées : T002, T001
+2025-12-03 11:34:08,578 - INFO - -> Extraction météo depuis l'API
+2025-12-03 11:34:08,793 - INFO - Météo récupérée — status 200
+2025-12-03 11:34:08,800 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 11:34:08,800 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 11:34:08,800 - INFO - Total lignes brutes combinées : 398
+2025-12-03 11:34:08,800 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 11:34:08,800 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 11:34:08,800 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 11:34:08,804 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 35, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: server does not support SSL, but SSL was required
+
+2025-12-03 11:34:08,809 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 224, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 183, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 35, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: server does not support SSL, but SSL was required
+
+2025-12-03 12:05:31,296 - INFO - Démarrage du pipeline ETL.
+2025-12-03 12:05:31,296 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 12:05:31,296 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 12:05:31,296 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 12:05:31,296 - INFO - -> Extraction du CSV (Production)
+2025-12-03 12:05:31,297 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 12:05:31,297 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 12:05:31,299 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 12:05:31,300 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 12:05:31,313 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 12:05:31,313 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 12:05:31,313 - INFO - -> Extraction météo depuis l'API
+2025-12-03 12:05:31,679 - INFO - Météo récupérée — status 200
+2025-12-03 12:05:31,687 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 12:05:31,687 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 12:05:31,687 - INFO - Total lignes brutes combinées : 398
+2025-12-03 12:05:31,688 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:05:31,688 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:05:31,688 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 12:05:31,691 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 35, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: server does not support SSL, but SSL was required
+
+2025-12-03 12:05:31,697 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 224, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 183, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 35, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: server does not support SSL, but SSL was required
+
+2025-12-03 12:15:13,215 - INFO - Démarrage du pipeline ETL.
+2025-12-03 12:15:13,215 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 12:15:13,215 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 12:15:13,215 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 12:15:13,215 - INFO - -> Extraction du CSV (Production)
+2025-12-03 12:15:13,216 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 12:15:13,216 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 12:15:13,218 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 12:15:13,220 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 12:15:13,232 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 12:15:13,232 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 12:15:13,232 - INFO - -> Extraction météo depuis l'API
+2025-12-03 12:15:13,747 - INFO - Météo récupérée — status 200
+2025-12-03 12:15:13,755 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 12:15:13,756 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 12:15:13,756 - INFO - Total lignes brutes combinées : 398
+2025-12-03 12:15:13,756 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:15:13,756 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:15:13,756 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 12:15:13,759 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 35, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: server does not support SSL, but SSL was required
+
+2025-12-03 12:15:13,763 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 224, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 183, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 35, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: server does not support SSL, but SSL was required
+
+2025-12-03 12:51:16,014 - INFO - Démarrage du pipeline ETL.
+2025-12-03 12:51:16,014 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 12:51:16,014 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 12:51:16,014 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 12:51:16,014 - INFO - -> Extraction du CSV (Production)
+2025-12-03 12:51:16,015 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 12:51:16,015 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 12:51:16,017 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 12:51:16,019 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 12:51:16,041 - ERROR - Erreur SQL PostgreSQL : 42P01 - ERROR:  relation "raw_measurements" does not exist
+LINE 9:     FROM raw_measurements
+                 ^
+
+2025-12-03 12:51:16,042 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 12:51:16,042 - INFO - -> Extraction météo depuis l'API
+2025-12-03 12:51:16,222 - INFO - Météo récupérée — status 200
+2025-12-03 12:51:16,227 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 12:51:16,227 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 12:51:16,227 - INFO - Total lignes brutes combinées : 398
+2025-12-03 12:51:16,228 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:51:16,228 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:51:16,228 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 12:51:16,240 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 39, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedTable: relation "consolidated_measurements" does not exist
+LINE 2:     INSERT INTO consolidated_measurements ("date","turbine_i...
+                        ^
+
+2025-12-03 12:51:16,244 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 224, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 183, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 39, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.UndefinedTable: relation "consolidated_measurements" does not exist
+LINE 2:     INSERT INTO consolidated_measurements ("date","turbine_i...
+                        ^
+
+2025-12-03 12:55:27,107 - INFO - Démarrage du pipeline ETL.
+2025-12-03 12:55:27,108 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 12:55:27,108 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 12:55:27,108 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 12:55:27,108 - INFO - -> Extraction du CSV (Production)
+2025-12-03 12:55:27,108 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 12:55:27,108 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 12:55:27,109 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 12:55:27,110 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 12:55:27,367 - INFO - 84968 mesures extraites depuis la base interne
+2025-12-03 12:55:27,605 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 12:55:27,605 - INFO - -> Extraction météo depuis l'API
+2025-12-03 12:55:27,774 - INFO - Météo récupérée — status 200
+2025-12-03 12:55:27,778 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 12:55:27,778 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 12:55:27,779 - INFO - Total lignes brutes combinées : 85366
+2025-12-03 12:55:27,785 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:55:27,785 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 12:55:27,786 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 12:55:30,680 - INFO - 85366 lignes insérées dans consolidated_measurements
+2025-12-03 12:55:30,682 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T12:55:30.682623', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84968, 'weather_rows_creees': 336, 'inserted_rows': 85366, 'anomalies_corrigees': 0}
+2025-12-03 12:55:30,683 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T12:55:30.682623', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84968, 'weather_rows_creees': 336, 'inserted_rows': 85366, 'anomalies_corrigees': 0}
+2025-12-03 12:55:30,683 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
