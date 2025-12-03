@@ -1,6 +1,9 @@
 """
 extract_db.py
-Extraction des dernières mesures depuis la base PostgreSQL.
+
+Module d'extraction des données de capteurs depuis la base de données PostgreSQL interne.
+Il exécute une requête SQL pour récupérer les mesures brutes sur une période donnée (lookback window),
+en utilisant un curseur basé sur un dictionnaire (RealDictCursor) pour faciliter la transformation.
 """
 import psycopg2
 from psycopg2.extras import RealDictCursor
@@ -10,6 +13,19 @@ import pandas as pd
 logger = logging.getLogger(__name__)
 
 def fetch_last_24h(conn_params, lookback_minutes=1440):
+    """
+    Récupère les mesures brutes de capteurs sur la période de temps spécifiée.
+
+    La requête sélectionne les données de la table 'raw_measurements' et les renomme pour 
+    correspondre au schéma de la table cible (ex: ts_utc -> date).
+
+    Args:
+        conn_params (dict): Paramètres de connexion PostgreSQL.
+        lookback_minutes (int): Nombre de minutes à remonter dans le temps (par défaut 1440 min = 24h).
+
+    Returns:
+        list[dict]: Liste des enregistrements extraits ou une liste vide en cas d'erreur.
+    """
 
     query = """
     SELECT 

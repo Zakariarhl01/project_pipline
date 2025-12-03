@@ -1,3 +1,10 @@
+"""
+extract_api.py
+
+Module d'extraction des données météorologiques historiques via l'API Open-Meteo.
+Il gère la connexion HTTP, les requêtes et la gestion des erreurs de réseau.
+"""
+
 import requests
 import logging
 from datetime import datetime
@@ -6,6 +13,20 @@ from tabulate import tabulate
 logger = logging.getLogger(__name__)
 
 def fetch_weather_open_meteo(base_url, params, timeout=30):
+    """
+    Exécute une requête GET vers l'API Open-Meteo pour obtenir les données météo.
+
+    Args:
+        base_url (str): URL de base de l'API.
+        params (dict): Paramètres de la requête (latitude, longitude, hourly, etc.).
+        timeout (int): Délai d'attente maximum de la requête en secondes.
+
+    Returns:
+        dict: Le corps de la réponse JSON de l'API.
+
+    Raises:
+        requests.RequestException: Si une erreur de connexion ou de statut HTTP survient.
+    """
     try:
         r = requests.get(base_url, params=params, timeout=timeout)
         r.raise_for_status()

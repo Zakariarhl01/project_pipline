@@ -1,5 +1,11 @@
 """
-transform.py — Transformations CSV, DB, API et qualité
+transform.py
+
+Module de transformation des données. Il centralise :
+1. Les conversions d'unités (ex: Celsius vers Kelvin, km/h vers m/s).
+2. Le parsing et la standardisation des formats de date/heure.
+3. La normalisation des structures de données pour chaque source (CSV, DB, API).
+4. Le contrôle qualité et le nettoyage des anomalies (outliers).
 """
 import logging
 from datetime import datetime
@@ -69,6 +75,17 @@ def parse_date(date_obj):
 # --- TRANSFORMATIONS ---
 
 def transform_production_rows(rows):
+    """
+    Transforme et standardise les lignes issues du CSV de production.
+    
+    Effectue le renommage des colonnes, le parsing des dates et la conversion des booléens.
+
+    Args:
+        df_prod (pd.DataFrame): DataFrame brut des données de production.
+
+    Returns:
+        list[dict]: Liste des enregistrements transformés et formatés.
+    """
     cleaned = []
     for r in rows:
         rec = {
@@ -86,6 +103,17 @@ def transform_production_rows(rows):
     return cleaned
 
 def transform_sensor_rows(rows):
+    """
+    Transforme et standardise les lignes issues de la DB des capteurs.
+    
+    Assure l'ajout de la colonne 'source' et la normalisation des champs manquants.
+
+    Args:
+        sensor_data (list[dict]): Liste des enregistrements bruts des capteurs.
+
+    Returns:
+        list[dict]: Liste des enregistrements transformés et formatés.
+    """
     cleaned = []
     for r in rows:
         # On essaie de récupérer la date depuis 'date' ou 'timestamp' selon ce que la DB renvoie
@@ -105,6 +133,19 @@ def transform_sensor_rows(rows):
     return cleaned
 
 def transform_api_rows(api_data, active_turbines):
+    """
+    Transforme les données météo de l'API et les duplique pour chaque turbine active.
+
+    Effectue les conversions d'unités (C vers K, km/h vers m/s) et standardise la structure 
+    pour la fusion.
+
+    Args:
+        weather_data (dict): Réponse JSON de l'API météo.
+        active_turbines (list): Liste des IDs de turbines pour lesquelles dupliquer les données.
+
+    Returns:
+        list[dict]: Liste des enregistrements météo dupliqués pour chaque turbine.
+    """
     if not api_data or "hourly" not in api_data:
         return []
     
@@ -142,6 +183,19 @@ def transform_api_rows(api_data, active_turbines):
 
 # --- QUALITÉ ---
 def quality_check(records):
+    """
+    Applique des règles de qualité sur l'ensemble des enregistrements consolidés.
+
+    Les règles incluent le filtrage des valeurs physiques aberrantes (température irréaliste,
+    vent excessif). Les valeurs invalides sont remplacées par None et le nombre 
+    d'anomalies est comptabilisé.
+
+    Args:
+        records (list[dict]): Liste des enregistrements à vérifier.
+
+    Returns:
+        tuple: (list[dict], int) - Liste des enregistrements nettoyés et le nombre d'anomalies corrigées.
+    """
     valid_records = []
     anomalies = 0
     

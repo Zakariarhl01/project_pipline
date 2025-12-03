@@ -1,6 +1,12 @@
-# visualize_data.py
-# Interface utilisateur simple avec Streamlit.
-# Exécuter avec : streamlit run visualize_data.py
+"""
+visualize_data.py
+
+Interface utilisateur Streamlit pour la visualisation des données consolidées.
+Ce module interroge la table 'consolidated_measurements' pour afficher les indicateurs 
+clés, les tendances historiques (énergie, vent, température) et l'état des turbines.
+
+Pour lancer l'application : streamlit run visualize_data.py
+"""
 
 import streamlit as st
 import psycopg2
@@ -23,7 +29,18 @@ def load_config(path="config.yaml"):
 
 @st.cache_data(ttl=600) 
 def fetch_consolidated_data(conn_params):
-    """Récupère les données consolidées depuis la base de données."""
+    """
+    Récupère les données consolidées des 7 derniers jours depuis PostgreSQL pour la visualisation.
+
+    Utilise le décorateur @st.cache_data pour mettre en cache le résultat et améliorer la performance 
+    de l'application Streamlit.
+
+    Args:
+        conn_params (dict): Paramètres de connexion PostgreSQL.
+
+    Returns:
+        pd.DataFrame: DataFrame contenant les données consolidées ou un DataFrame vide en cas d'erreur.
+    """
     try:
         conn = psycopg2.connect(**conn_params)
         query = """

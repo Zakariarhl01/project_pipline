@@ -1,12 +1,14 @@
 """
-main_pipeline.py — Pipeline complet et robuste
-1. Configuration Logging (Console + Fichier) et création des répertoires
-2. Extraction CSV (Production)
-3. Extraction DB PostgreSQL (Capteurs)
-4. Extraction API météo
-5. Transformation et Qualité
-6. Chargement dans PostgreSQL (Upsert)
-7. Résumé
+main_pipeline.py
+
+Orchestrateur principal du pipeline ETL (Extract, Transform, Load) pour les données EnergiTech.
+Ce script coordonne toutes les étapes du flux de travail :
+
+1. Configuration et initialisation du logging.
+2. Extraction des données (CSV de production, PostgreSQL des capteurs, API Météo).
+3. Transformation et application des règles de qualité (conversion d'unités, nettoyage).
+4. Chargement des données dans la table cible 'consolidated_measurements' via l'opération UPSERT.
+5. Génération et affichage d'un rapport de synthèse.
 """
 
 # -----------------------
@@ -38,7 +40,19 @@ from load import insert_measurements
 # CHARGER CONFIGURATION
 # -----------------------
 def load_config(path="config.yaml"):
-    """Charge le fichier de configuration YAML."""
+    """
+    Charge le fichier de configuration YAML à partir du chemin spécifié.
+
+    Args:
+        path (str): Chemin d'accès au fichier config.yaml.
+
+    Returns:
+        dict: Le contenu du fichier de configuration.
+
+    Raises:
+        FileNotFoundError: Si le fichier de configuration est introuvable.
+        ValueError: Si le fichier YAML est vide ou mal formé.
+    """
     try:
         with open(path, "r", encoding="utf-8") as f:
             cfg = yaml.safe_load(f)
@@ -105,6 +119,12 @@ def ensure_dirs(cfg):
 # PIPELINE COMPLET
 # -----------------------
 def run():
+    """
+    Exécute le pipeline ETL complet de A à Z.
+
+    Coordonne les appels successifs aux modules d'extraction, de transformation 
+    et de chargement, gérant le flux de données entre chaque étape.
+    """
     
     # 0) Charger config
     cfg = load_config()
