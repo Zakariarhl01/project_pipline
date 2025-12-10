@@ -908,3 +908,954 @@ LINE 2:     INSERT INTO consolidated_measurements ("date","turbine_i...
 2025-12-03 12:55:30,682 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T12:55:30.682623', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84968, 'weather_rows_creees': 336, 'inserted_rows': 85366, 'anomalies_corrigees': 0}
 2025-12-03 12:55:30,683 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T12:55:30.682623', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84968, 'weather_rows_creees': 336, 'inserted_rows': 85366, 'anomalies_corrigees': 0}
 2025-12-03 12:55:30,683 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-03 14:51:06,166 - INFO - Démarrage du pipeline ETL.
+2025-12-03 14:51:06,167 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 14:51:06,167 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 14:51:06,167 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 14:51:06,167 - INFO - -> Extraction du CSV (Production)
+2025-12-03 14:51:06,168 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 14:51:06,168 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 14:51:06,169 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 14:51:06,171 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 14:51:06,432 - INFO - 84736 mesures extraites depuis la base interne
+2025-12-03 14:51:06,667 - INFO - Turbines actives détectées : T002, T001
+2025-12-03 14:51:06,667 - INFO - -> Extraction météo depuis l'API
+2025-12-03 14:51:06,861 - INFO - Météo récupérée — status 200
+2025-12-03 14:51:06,865 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 14:51:06,865 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 14:51:06,866 - INFO - Total lignes brutes combinées : 85134
+2025-12-03 14:51:06,872 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 14:51:06,872 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 14:51:06,872 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 14:51:10,478 - INFO - 85134 lignes insérées dans consolidated_measurements
+2025-12-03 14:51:10,486 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T14:51:10.485096', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84736, 'weather_rows_creees': 336, 'inserted_rows': 85134, 'anomalies_corrigees': 0}
+2025-12-03 14:51:10,486 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T14:51:10.485096', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84736, 'weather_rows_creees': 336, 'inserted_rows': 85134, 'anomalies_corrigees': 0}
+2025-12-03 14:51:10,487 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-03 15:33:09,469 - INFO - Démarrage du pipeline ETL.
+2025-12-03 15:33:09,469 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 15:33:09,469 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 15:33:09,469 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 15:33:09,469 - INFO - -> Extraction du CSV (Production)
+2025-12-03 15:33:09,470 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 15:33:09,470 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 15:33:09,472 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 15:33:09,474 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 15:33:09,487 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 15:33:09,487 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 15:33:09,487 - INFO - -> Extraction météo depuis l'API
+2025-12-03 15:33:09,680 - INFO - Météo récupérée — status 200
+2025-12-03 15:33:09,686 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 15:33:09,686 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 15:33:09,686 - INFO - Total lignes brutes combinées : 398
+2025-12-03 15:33:09,686 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:33:09,686 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:33:09,686 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 15:33:09,689 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-12-03 15:33:09,693 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 244, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 203, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+connection to server at "localhost" (127.0.0.1), port 5432 failed: Connection refused
+	Is the server running on that host and accepting TCP/IP connections?
+
+2025-12-03 15:34:30,902 - INFO - Démarrage du pipeline ETL.
+2025-12-03 15:34:30,902 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 15:34:30,902 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 15:34:30,902 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 15:34:30,902 - INFO - -> Extraction du CSV (Production)
+2025-12-03 15:34:30,903 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 15:34:30,903 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 15:34:30,903 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 15:34:30,905 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 15:34:30,917 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 15:34:30,917 - INFO - Turbines actives détectées : T002, T001
+2025-12-03 15:34:30,917 - INFO - -> Extraction météo depuis l'API
+2025-12-03 15:34:31,061 - INFO - Météo récupérée — status 200
+2025-12-03 15:34:31,066 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 15:34:31,066 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 15:34:31,066 - INFO - Total lignes brutes combinées : 398
+2025-12-03 15:34:31,066 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:34:31,066 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:34:31,066 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 15:34:31,070 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "postgres" does not exist
+
+2025-12-03 15:34:31,072 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 244, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 203, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "postgres" does not exist
+
+2025-12-03 15:36:10,877 - INFO - Démarrage du pipeline ETL.
+2025-12-03 15:36:10,877 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 15:36:10,877 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 15:36:10,877 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 15:36:10,877 - INFO - -> Extraction du CSV (Production)
+2025-12-03 15:36:10,878 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 15:36:10,878 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 15:36:10,878 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 15:36:10,880 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 15:36:10,895 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 15:36:10,895 - INFO - Turbines actives détectées : T002, T001
+2025-12-03 15:36:10,895 - INFO - -> Extraction météo depuis l'API
+2025-12-03 15:36:11,057 - INFO - Météo récupérée — status 200
+2025-12-03 15:36:11,063 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 15:36:11,063 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 15:36:11,063 - INFO - Total lignes brutes combinées : 398
+2025-12-03 15:36:11,063 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:36:11,063 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:36:11,063 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 15:36:11,067 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "postgres" does not exist
+
+2025-12-03 15:36:11,070 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 244, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 203, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  role "postgres" does not exist
+
+2025-12-03 15:38:24,294 - INFO - Démarrage du pipeline ETL.
+2025-12-03 15:38:24,295 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 15:38:24,295 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 15:38:24,295 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 15:38:24,295 - INFO - -> Extraction du CSV (Production)
+2025-12-03 15:38:24,296 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 15:38:24,296 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 15:38:24,297 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 15:38:24,299 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 15:38:24,311 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 15:38:24,311 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 15:38:24,311 - INFO - -> Extraction météo depuis l'API
+2025-12-03 15:38:24,463 - INFO - Météo récupérée — status 200
+2025-12-03 15:38:24,469 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 15:38:24,469 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 15:38:24,469 - INFO - Total lignes brutes combinées : 398
+2025-12-03 15:38:24,469 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:38:24,469 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:38:24,469 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 15:38:24,474 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "donnee_meteo" does not exist
+
+2025-12-03 15:38:24,479 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 244, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 203, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "donnee_meteo" does not exist
+
+2025-12-03 15:41:07,768 - INFO - Démarrage du pipeline ETL.
+2025-12-03 15:41:07,768 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 15:41:07,768 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 15:41:07,768 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 15:41:07,768 - INFO - -> Extraction du CSV (Production)
+2025-12-03 15:41:07,769 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 15:41:07,769 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 15:41:07,770 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 15:41:07,772 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 15:41:07,784 - ERROR - Erreur SQL PostgreSQL : None - None
+2025-12-03 15:41:07,784 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 15:41:07,784 - INFO - -> Extraction météo depuis l'API
+2025-12-03 15:41:07,945 - INFO - Météo récupérée — status 200
+2025-12-03 15:41:07,950 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 15:41:07,950 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 15:41:07,950 - INFO - Total lignes brutes combinées : 398
+2025-12-03 15:41:07,950 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:41:07,950 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:41:07,951 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 15:41:07,954 - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "donnee_meteo" does not exist
+
+2025-12-03 15:41:07,960 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 244, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/main_pipeline.py", line 203, in run
+    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 72, in insert_measurements
+    with psycopg2.connect(**conn_params) as conn:
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+psycopg2.OperationalError: connection to server at "localhost" (::1), port 5432 failed: FATAL:  database "donnee_meteo" does not exist
+
+2025-12-03 15:41:29,397 - INFO - Démarrage du pipeline ETL.
+2025-12-03 15:41:29,397 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-03 15:41:29,397 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-03 15:41:29,397 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-03 15:41:29,397 - INFO - -> Extraction du CSV (Production)
+2025-12-03 15:41:29,398 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-03 15:41:29,398 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-03 15:41:29,398 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-03 15:41:29,400 - INFO - -> Extraction des capteurs depuis DB
+2025-12-03 15:41:29,664 - INFO - 84636 mesures extraites depuis la base interne
+2025-12-03 15:41:29,900 - INFO - Turbines actives détectées : T001, T002
+2025-12-03 15:41:29,901 - INFO - -> Extraction météo depuis l'API
+2025-12-03 15:41:30,044 - INFO - Météo récupérée — status 200
+2025-12-03 15:41:30,049 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-03 15:41:30,049 - INFO - -> Transformation et contrôle qualité des données
+2025-12-03 15:41:30,050 - INFO - Total lignes brutes combinées : 85034
+2025-12-03 15:41:30,056 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:41:30,057 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-03 15:41:30,057 - INFO - -> Chargement en base PostgreSQL
+2025-12-03 15:41:32,673 - INFO - 85034 lignes insérées dans consolidated_measurements
+2025-12-03 15:41:32,680 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T15:41:32.679875', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84636, 'weather_rows_creees': 336, 'inserted_rows': 85034, 'anomalies_corrigees': 0}
+2025-12-03 15:41:32,681 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-03T15:41:32.679875', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 84636, 'weather_rows_creees': 336, 'inserted_rows': 85034, 'anomalies_corrigees': 0}
+2025-12-03 15:41:32,681 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-05 22:00:32,239 - INFO - Démarrage du pipeline ETL.
+2025-12-05 22:00:32,239 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-05 22:00:32,239 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-05 22:00:32,239 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-05 22:00:32,239 - INFO - -> Extraction du CSV (Production)
+2025-12-05 22:00:32,240 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-05 22:00:32,241 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-05 22:00:32,242 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-05 22:00:32,244 - INFO - -> Extraction des capteurs depuis DB
+2025-12-05 22:00:32,520 - INFO - 78118 mesures extraites depuis la base interne
+2025-12-05 22:00:32,731 - INFO - Turbines actives détectées : T001, T002
+2025-12-05 22:00:32,731 - INFO - -> Extraction météo depuis l'API
+2025-12-05 22:00:32,902 - INFO - Météo récupérée — status 200
+2025-12-05 22:00:32,907 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-05 22:00:32,907 - INFO - -> Transformation et contrôle qualité des données
+2025-12-05 22:00:32,908 - INFO - Total lignes brutes combinées : 78516
+2025-12-05 22:00:32,915 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-05 22:00:32,915 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-05 22:00:32,915 - INFO - -> Chargement en base PostgreSQL
+2025-12-05 22:00:36,023 - INFO - 78516 lignes insérées dans consolidated_measurements
+2025-12-05 22:00:36,031 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-05T22:00:36.030108', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 78118, 'weather_rows_creees': 336, 'inserted_rows': 78516, 'anomalies_corrigees': 0}
+2025-12-05 22:00:36,032 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-05T22:00:36.030108', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 78118, 'weather_rows_creees': 336, 'inserted_rows': 78516, 'anomalies_corrigees': 0}
+2025-12-05 22:00:36,032 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-08 12:33:00,238 - INFO - Démarrage du pipeline ETL.
+2025-12-08 12:33:00,238 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-08 12:33:00,238 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-08 12:33:00,238 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-08 12:33:00,238 - INFO - -> Extraction du CSV (Production)
+2025-12-08 12:33:00,239 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-08 12:33:00,239 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-08 12:33:00,241 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-08 12:33:00,243 - INFO - -> Extraction des capteurs depuis DB
+2025-12-08 12:33:00,479 - INFO - 70612 mesures extraites depuis la base interne
+2025-12-08 12:33:00,667 - INFO - Turbines actives détectées : T001, T002
+2025-12-08 12:33:00,667 - INFO - -> Extraction météo depuis l'API
+2025-12-08 12:33:00,927 - INFO - Météo récupérée — status 200
+2025-12-08 12:33:00,931 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-08 12:33:00,931 - INFO - -> Transformation et contrôle qualité des données
+2025-12-08 12:33:00,933 - INFO - Total lignes brutes combinées : 71010
+2025-12-08 12:33:00,938 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-08 12:33:00,938 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-08 12:33:00,938 - INFO - -> Chargement en base PostgreSQL
+2025-12-08 12:33:03,787 - INFO - 71010 lignes insérées dans consolidated_measurements
+2025-12-08 12:33:03,794 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-08T12:33:03.793924', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 70612, 'weather_rows_creees': 336, 'inserted_rows': 71010, 'anomalies_corrigees': 0}
+2025-12-08 12:33:03,795 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-08T12:33:03.793924', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 70612, 'weather_rows_creees': 336, 'inserted_rows': 71010, 'anomalies_corrigees': 0}
+2025-12-08 12:33:03,796 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 11:34:52,479 - INFO - Démarrage du pipeline ETL.
+2025-12-10 11:34:52,479 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 11:34:52,479 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 11:34:52,479 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 11:34:52,479 - INFO - -> Extraction du CSV (Production)
+2025-12-10 11:34:52,480 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-10 11:34:52,480 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-10 11:34:52,482 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-10 11:34:52,483 - INFO - -> Extraction des capteurs depuis DB
+2025-12-10 11:34:52,483 - INFO - Tentative de génération de nouvelles mesures...
+2025-12-10 11:34:52,501 - INFO - Génération et insertion réussies de 2 nouvelles mesures pour 2025-12-10 10:34:00.
+2025-12-10 11:34:52,711 - INFO - 64970 mesures extraites depuis la base interne (incluant la nouvelle mesure si lookback le permet)
+2025-12-10 11:34:52,885 - INFO - Turbines actives détectées : T001, T002
+2025-12-10 11:34:52,885 - INFO - -> Extraction météo depuis l'API
+2025-12-10 11:34:53,055 - INFO - Météo récupérée — status 200
+2025-12-10 11:34:53,060 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 11:34:53,060 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 11:34:53,061 - INFO - Total lignes brutes combinées : 65368
+2025-12-10 11:34:53,067 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:34:53,067 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:34:53,067 - INFO - -> Chargement en base PostgreSQL
+2025-12-10 11:34:55,292 - INFO - 65368 lignes insérées dans consolidated_measurements
+2025-12-10 11:34:55,300 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:34:55.299170', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64970, 'weather_rows_creees': 336, 'inserted_rows': 65368, 'anomalies_corrigees': 0}
+2025-12-10 11:34:55,301 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:34:55.299170', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64970, 'weather_rows_creees': 336, 'inserted_rows': 65368, 'anomalies_corrigees': 0}
+2025-12-10 11:34:55,301 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 11:39:24,607 - INFO - Démarrage du pipeline ETL.
+2025-12-10 11:39:24,608 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 11:39:24,608 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 11:39:24,608 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 11:39:24,608 - INFO - -> Extraction du CSV (Production)
+2025-12-10 11:39:24,608 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-10 11:39:24,608 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-10 11:39:24,609 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-10 11:39:24,610 - INFO - -> Extraction des capteurs depuis DB
+2025-12-10 11:39:24,611 - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 11:39:24,631 - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 10:39:00.
+2025-12-10 11:39:24,841 - INFO - Étape 2/2 : 64960 mesures extraites de raw_measurements.
+2025-12-10 11:39:25,016 - INFO - Turbines actives détectées : T001, T002
+2025-12-10 11:39:25,016 - INFO - -> Extraction météo depuis l'API
+2025-12-10 11:39:25,185 - INFO - Météo récupérée — status 200
+2025-12-10 11:39:25,190 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 11:39:25,190 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 11:39:25,191 - INFO - Total lignes brutes combinées : 65358
+2025-12-10 11:39:25,197 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:39:25,197 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:39:25,197 - INFO - -> Chargement en base PostgreSQL
+2025-12-10 11:39:27,560 - INFO - 65358 lignes insérées dans consolidated_measurements
+2025-12-10 11:39:27,567 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:39:27.566359', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64960, 'weather_rows_creees': 336, 'inserted_rows': 65358, 'anomalies_corrigees': 0}
+2025-12-10 11:39:27,567 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:39:27.566359', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64960, 'weather_rows_creees': 336, 'inserted_rows': 65358, 'anomalies_corrigees': 0}
+2025-12-10 11:39:27,568 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 11:41:13,603 - INFO - Démarrage du pipeline ETL.
+2025-12-10 11:41:13,603 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 11:41:13,603 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 11:41:13,603 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 11:41:13,603 - INFO - -> Extraction du CSV (Production)
+2025-12-10 11:41:13,604 - INFO - Fichier CSV sélectionée : data/production_2025_10.csv
+2025-12-10 11:41:13,604 - INFO - Fichier CSV trouvé : data/production_2025_10.csv
+2025-12-10 11:41:13,605 - INFO - 62 lignes lues depuis data/production_2025_10.csv
+2025-12-10 11:41:13,605 - ERROR - Erreur inattendue lors de l'extraction CSV.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 152, in run
+    prod_clean = transform_production_rows(prod_rows.to_dict(orient="records"))
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/transform.py", line 72, in transform_production_rows
+    df['turbine_id'] = df['Turbine_ID'].fillna('UNKNOWN')
+TypeError: list indices must be integers or slices, not str
+2025-12-10 11:41:13,606 - INFO - -> Extraction des capteurs depuis DB
+2025-12-10 11:41:13,606 - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 11:41:13,622 - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 10:41:00.
+2025-12-10 11:41:13,827 - INFO - Étape 2/2 : 64956 mesures extraites de raw_measurements.
+2025-12-10 11:41:13,939 - INFO - 64956 lignes capteurs transformées.
+2025-12-10 11:41:13,945 - INFO - Turbines actives détectées : T001, T002
+2025-12-10 11:41:13,945 - INFO - -> Extraction météo depuis l'API
+2025-12-10 11:41:14,537 - INFO - Météo récupérée — status 200
+2025-12-10 11:41:14,541 - WARNING - Impossible de parser la date : 2025-12-10T00:00
+2025-12-10 11:41:14,541 - WARNING - Impossible de parser la date : 2025-12-10T01:00
+2025-12-10 11:41:14,541 - WARNING - Impossible de parser la date : 2025-12-10T02:00
+2025-12-10 11:41:14,541 - WARNING - Impossible de parser la date : 2025-12-10T03:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T04:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T05:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T06:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T07:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T08:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T09:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T10:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T11:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T12:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T13:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T14:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T15:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T16:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T17:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T18:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T19:00
+2025-12-10 11:41:14,542 - WARNING - Impossible de parser la date : 2025-12-10T20:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-10T21:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-10T22:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-10T23:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T00:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T01:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T02:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T03:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T04:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T05:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T06:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T07:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T08:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T09:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T10:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T11:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T12:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T13:00
+2025-12-10 11:41:14,543 - WARNING - Impossible de parser la date : 2025-12-11T14:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T15:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T16:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T17:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T18:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T19:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T20:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T21:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T22:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-11T23:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T00:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T01:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T02:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T03:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T04:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T05:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T06:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T07:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T08:00
+2025-12-10 11:41:14,544 - WARNING - Impossible de parser la date : 2025-12-12T09:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T10:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T11:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T12:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T13:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T14:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T15:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T16:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T17:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T18:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T19:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T20:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T21:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T22:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-12T23:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-13T00:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-13T01:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-13T02:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-13T03:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-13T04:00
+2025-12-10 11:41:14,545 - WARNING - Impossible de parser la date : 2025-12-13T05:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T06:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T07:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T08:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T09:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T10:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T11:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T12:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T13:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T14:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T15:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T16:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T17:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T18:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T19:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T20:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T21:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T22:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-13T23:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-14T00:00
+2025-12-10 11:41:14,546 - WARNING - Impossible de parser la date : 2025-12-14T01:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T02:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T03:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T04:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T05:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T06:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T07:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T08:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T09:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T10:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T11:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T12:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T13:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T14:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T15:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T16:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T17:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T18:00
+2025-12-10 11:41:14,547 - WARNING - Impossible de parser la date : 2025-12-14T19:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-14T20:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-14T21:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-14T22:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-14T23:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T00:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T01:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T02:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T03:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T04:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T05:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T06:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T07:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T08:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T09:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T10:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T11:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T12:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T13:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T14:00
+2025-12-10 11:41:14,548 - WARNING - Impossible de parser la date : 2025-12-15T15:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T16:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T17:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T18:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T19:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T20:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T21:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T22:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-15T23:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T00:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T01:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T02:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T03:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T04:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T05:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T06:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T07:00
+2025-12-10 11:41:14,549 - WARNING - Impossible de parser la date : 2025-12-16T08:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T09:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T10:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T11:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T12:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T13:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T14:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T15:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T16:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T17:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T18:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T19:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T20:00
+2025-12-10 11:41:14,550 - WARNING - Impossible de parser la date : 2025-12-16T21:00
+2025-12-10 11:41:14,551 - WARNING - Impossible de parser la date : 2025-12-16T22:00
+2025-12-10 11:41:14,551 - WARNING - Impossible de parser la date : 2025-12-16T23:00
+2025-12-10 11:41:14,557 - INFO - Météo dupliquée pour 2 turbines : 0 lignes.
+2025-12-10 11:41:14,557 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 11:41:14,559 - INFO - Total lignes brutes combinées : 64956
+2025-12-10 11:41:14,598 - INFO - 0 anomalies corrigées par la vérification de qualité.
+2025-12-10 11:41:14,598 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:41:14,598 - INFO - -> Chargement en base PostgreSQL
+2025-12-10 11:41:17,784 - INFO - 64956 lignes insérées dans consolidated_measurements
+2025-12-10 11:41:17,796 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:41:17.795938', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64956, 'weather_rows_creees': 0, 'inserted_rows': 64956, 'anomalies_corrigees': 0}
+2025-12-10 11:41:17,797 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:41:17.795938', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64956, 'weather_rows_creees': 0, 'inserted_rows': 64956, 'anomalies_corrigees': 0}
+2025-12-10 11:41:17,797 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 11:49:48,879 - INFO - Démarrage du pipeline ETL.
+2025-12-10 11:49:48,879 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 11:49:48,880 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 11:49:48,880 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 11:49:48,880 - INFO - -> Extraction du CSV (Production)
+2025-12-10 11:49:48,880 - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 11:49:48,880 - INFO - Fichier CSV trouvé : data/production_2025_12.csv
+2025-12-10 11:49:48,881 - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 11:49:48,881 - ERROR - Erreur inattendue lors de l'extraction CSV.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 152, in run
+    prod_clean = transform_production_rows(prod_rows.to_dict(orient="records"))
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/transform.py", line 72, in transform_production_rows
+    df['turbine_id'] = df['Turbine_ID'].fillna('UNKNOWN')
+TypeError: list indices must be integers or slices, not str
+2025-12-10 11:49:48,882 - INFO - -> Extraction des capteurs depuis DB
+2025-12-10 11:49:48,882 - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 11:49:48,901 - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 10:49:00.
+2025-12-10 11:49:49,100 - INFO - Étape 2/2 : 64940 mesures extraites de raw_measurements.
+2025-12-10 11:49:49,210 - INFO - 64940 lignes capteurs transformées.
+2025-12-10 11:49:49,217 - INFO - Turbines actives détectées : T001, T002
+2025-12-10 11:49:49,217 - INFO - -> Extraction météo depuis l'API
+2025-12-10 11:49:49,380 - INFO - Météo récupérée — status 200
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T00:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T01:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T02:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T03:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T04:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T05:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T06:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T07:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T08:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T09:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T10:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T11:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T12:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T13:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T14:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T15:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T16:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T17:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T18:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T19:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T20:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T21:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T22:00
+2025-12-10 11:49:49,382 - WARNING - Impossible de parser la date : 2025-12-10T23:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T00:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T01:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T02:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T03:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T04:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T05:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T06:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T07:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T08:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T09:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T10:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T11:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T12:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T13:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T14:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T15:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T16:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T17:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T18:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T19:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T20:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T21:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T22:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-11T23:00
+2025-12-10 11:49:49,383 - WARNING - Impossible de parser la date : 2025-12-12T00:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T01:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T02:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T03:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T04:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T05:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T06:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T07:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T08:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T09:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T10:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T11:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T12:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T13:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T14:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T15:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T16:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T17:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T18:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T19:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T20:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T21:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T22:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-12T23:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-13T00:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-13T01:00
+2025-12-10 11:49:49,384 - WARNING - Impossible de parser la date : 2025-12-13T02:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T03:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T04:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T05:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T06:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T07:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T08:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T09:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T10:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T11:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T12:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T13:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T14:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T15:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T16:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T17:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T18:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T19:00
+2025-12-10 11:49:49,385 - WARNING - Impossible de parser la date : 2025-12-13T20:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-13T21:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-13T22:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-13T23:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T00:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T01:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T02:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T03:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T04:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T05:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T06:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T07:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T08:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T09:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T10:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T11:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T12:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T13:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T14:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T15:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T16:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T17:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T18:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T19:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T20:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T21:00
+2025-12-10 11:49:49,386 - WARNING - Impossible de parser la date : 2025-12-14T22:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-14T23:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T00:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T01:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T02:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T03:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T04:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T05:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T06:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T07:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T08:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T09:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T10:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T11:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T12:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T13:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T14:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T15:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T16:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T17:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T18:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T19:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T20:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T21:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T22:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-15T23:00
+2025-12-10 11:49:49,387 - WARNING - Impossible de parser la date : 2025-12-16T00:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T01:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T02:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T03:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T04:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T05:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T06:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T07:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T08:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T09:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T10:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T11:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T12:00
+2025-12-10 11:49:49,388 - WARNING - Impossible de parser la date : 2025-12-16T13:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T14:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T15:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T16:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T17:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T18:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T19:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T20:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T21:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T22:00
+2025-12-10 11:49:49,389 - WARNING - Impossible de parser la date : 2025-12-16T23:00
+2025-12-10 11:49:49,393 - INFO - Météo dupliquée pour 2 turbines : 0 lignes.
+2025-12-10 11:49:49,393 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 11:49:49,394 - INFO - Total lignes brutes combinées : 64940
+2025-12-10 11:49:49,426 - INFO - 0 anomalies corrigées par la vérification de qualité.
+2025-12-10 11:49:49,426 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:49:49,426 - INFO - -> Chargement en base PostgreSQL
+2025-12-10 11:49:52,676 - INFO - 64940 lignes insérées dans consolidated_measurements
+2025-12-10 11:49:52,682 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:49:52.681962', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64940, 'weather_rows_creees': 0, 'inserted_rows': 64940, 'anomalies_corrigees': 0}
+2025-12-10 11:49:52,683 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:49:52.681962', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64940, 'weather_rows_creees': 0, 'inserted_rows': 64940, 'anomalies_corrigees': 0}
+2025-12-10 11:49:52,683 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 11:51:43,850 - INFO - Démarrage du pipeline ETL.
+2025-12-10 11:51:43,851 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 11:51:43,851 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 11:51:43,851 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 11:51:43,851 - INFO - -> Extraction du CSV (Production)
+2025-12-10 11:51:43,852 - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 11:51:43,852 - INFO - Fichier CSV trouvé : data/production_2025_12.csv
+2025-12-10 11:51:43,853 - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 11:51:43,854 - ERROR - Erreur inattendue lors de l'extraction CSV.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 152, in run
+    prod_clean = transform_production_rows(prod_rows.to_dict(orient="records"))
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/transform.py", line 80, in transform_production_rows
+    df['turbine_id'] = df['Turbine_ID'].fillna('UNKNOWN')
+TypeError: list indices must be integers or slices, not str
+2025-12-10 11:51:43,855 - INFO - -> Extraction des capteurs depuis DB
+2025-12-10 11:51:43,855 - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 11:51:43,871 - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 10:51:00.
+2025-12-10 11:51:44,071 - INFO - Étape 2/2 : 64936 mesures extraites de raw_measurements.
+2025-12-10 11:51:44,182 - INFO - 64936 lignes capteurs transformées.
+2025-12-10 11:51:44,188 - INFO - Turbines actives détectées : T001, T002
+2025-12-10 11:51:44,188 - INFO - -> Extraction météo depuis l'API
+2025-12-10 11:51:44,365 - INFO - Météo récupérée — status 200
+2025-12-10 11:51:44,378 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 11:51:44,378 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 11:51:44,379 - INFO - Total lignes brutes combinées : 65272
+2025-12-10 11:51:44,412 - INFO - 0 anomalies corrigées par la vérification de qualité.
+2025-12-10 11:51:44,412 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:51:44,412 - INFO - -> Chargement en base PostgreSQL
+2025-12-10 11:51:47,884 - INFO - 65272 lignes insérées dans consolidated_measurements
+2025-12-10 11:51:47,900 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:51:47.899864', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64936, 'weather_rows_creees': 336, 'inserted_rows': 65272, 'anomalies_corrigees': 0}
+2025-12-10 11:51:47,901 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:51:47.899864', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64936, 'weather_rows_creees': 336, 'inserted_rows': 65272, 'anomalies_corrigees': 0}
+2025-12-10 11:51:47,901 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 11:53:18,375 - INFO - Démarrage du pipeline ETL.
+2025-12-10 11:53:18,375 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 11:53:18,375 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 11:53:18,375 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 11:53:18,375 - INFO - -> Extraction du CSV (Production)
+2025-12-10 11:53:18,376 - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 11:53:18,376 - INFO - Fichier CSV trouvé : data/production_2025_12.csv
+2025-12-10 11:53:18,378 - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 11:53:18,378 - ERROR - Erreur inattendue lors de l'extraction CSV.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 152, in run
+    prod_clean = transform_production_rows(prod_rows.to_dict(orient="records"))
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/transform.py", line 80, in transform_production_rows
+    df['turbine_id'] = df['Turbine_ID'].fillna('UNKNOWN')
+TypeError: list indices must be integers or slices, not str
+2025-12-10 11:53:18,379 - INFO - -> Extraction des capteurs depuis DB
+2025-12-10 11:53:18,379 - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 11:53:18,400 - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 10:53:00.
+2025-12-10 11:53:18,609 - INFO - Étape 2/2 : 64932 mesures extraites de raw_measurements.
+2025-12-10 11:53:18,721 - INFO - 64932 lignes capteurs transformées.
+2025-12-10 11:53:18,728 - INFO - Turbines actives détectées : T001, T002
+2025-12-10 11:53:18,728 - INFO - -> Extraction météo depuis l'API
+2025-12-10 11:53:18,899 - INFO - Météo récupérée — status 200
+2025-12-10 11:53:18,910 - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 11:53:18,910 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 11:53:18,911 - INFO - Total lignes brutes combinées : 65268
+2025-12-10 11:53:18,944 - INFO - 0 anomalies corrigées par la vérification de qualité.
+2025-12-10 11:53:18,944 - INFO - Contrôle qualité terminé. Anomalies détectées/nettoyées : 0
+2025-12-10 11:53:18,944 - INFO - -> Chargement en base PostgreSQL
+2025-12-10 11:53:22,166 - INFO - 65268 lignes insérées dans consolidated_measurements
+2025-12-10 11:53:22,182 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:53:22.182107', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64932, 'weather_rows_creees': 336, 'inserted_rows': 65268, 'anomalies_corrigees': 0}
+2025-12-10 11:53:22,183 - INFO - Rapport d'exécution final : {'timestamp': '2025-12-10T11:53:22.182107', 'turbines_actives': 2, 'csv_rows_lues': 62, 'sensor_rows_lus': 64932, 'weather_rows_creees': 336, 'inserted_rows': 65268, 'anomalies_corrigees': 0}
+2025-12-10 11:53:22,183 - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 12:07:08,795 - INFO - Démarrage du pipeline ETL.
+2025-12-10 12:07:08,795 - INFO - Dossier créé ou déjà existant : /tmp/energitic_pipeline
+2025-12-10 12:07:08,795 - INFO - Dossier créé ou déjà existant : ./data/
+2025-12-10 12:07:08,795 - INFO - Dossier créé ou déjà existant : ./logs
+2025-12-10 12:07:08,795 - INFO - -> Extraction du CSV (Production)
+2025-12-10 12:07:08,796 - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 12:07:08,796 - INFO - Fichier CSV trouvé : data/production_2025_12.csv
+2025-12-10 12:07:08,798 - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 12:07:08,799 - ERROR - Erreur inattendue lors de l'extraction CSV.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 152, in run
+    prod_clean = transform_production_rows(prod_rows.to_dict(orient="records"))
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/transform.py", line 73, in transform_production_rows
+    if df.empty:
+AttributeError: 'list' object has no attribute 'empty'
+2025-12-10 12:07:08,800 - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 12:07:08,800 - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 12:07:08,800 - INFO - -> Extraction météo depuis l'API
+2025-12-10 12:07:09,023 - INFO - Météo récupérée — status 200
+2025-12-10 12:07:09,025 - ERROR - Erreur lors de l'extraction météo. Les données météo seront manquantes.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 183, in run
+    weather_clean = transform_api_rows(weather_json, active_turbines_list)
+NameError: name 'active_turbines_list' is not defined
+2025-12-10 12:07:09,025 - INFO - -> Transformation et contrôle qualité des données
+2025-12-10 12:07:09,025 - ERROR - Erreur FATALE (hors pipeline) survenue.
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 256, in <module>
+    run()
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/./main_pipeline.py", line 192, in run
+    combined = prod_clean + sensor_clean + weather_clean
+NameError: name 'sensor_clean' is not defined
+2025-12-10 13:48:28,879 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 13:48:28,879 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 13:48:28,879 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 13:48:28,879 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 13:48:28,900 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 12:48:00.
+2025-12-10 13:48:29,121 - extract_db - INFO - Étape 2/2 : 64702 mesures extraites de raw_measurements.
+2025-12-10 13:48:29,121 - __main__ - INFO - 64702 lignes brutes extraites de la DB.
+2025-12-10 13:48:29,121 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 13:48:29,121 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 13:48:29,125 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 13:48:29,125 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 13:48:29,125 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 13:48:29,299 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 13:48:29,299 - __main__ - INFO - Données météo récupérées.
+2025-12-10 13:48:29,299 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 13:50:50,519 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 13:50:50,519 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 13:50:50,519 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 13:50:50,519 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 13:50:50,536 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 12:50:00.
+2025-12-10 13:50:50,740 - extract_db - INFO - Étape 2/2 : 64698 mesures extraites de raw_measurements.
+2025-12-10 13:50:50,741 - __main__ - INFO - 64698 lignes brutes extraites de la DB.
+2025-12-10 13:50:50,741 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 13:50:50,741 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 13:50:50,746 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 13:50:50,747 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 13:50:50,747 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 13:50:50,921 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 13:50:50,922 - __main__ - INFO - Données météo récupérées.
+2025-12-10 13:50:50,922 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 13:50:51,000 - transform - INFO - 64698 lignes de capteurs transformées.
+2025-12-10 13:51:10,247 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 13:51:10,247 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 13:51:10,248 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 13:51:10,248 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 13:51:10,262 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 12:51:00.
+2025-12-10 13:51:10,456 - extract_db - INFO - Étape 2/2 : 64696 mesures extraites de raw_measurements.
+2025-12-10 13:51:10,456 - __main__ - INFO - 64696 lignes brutes extraites de la DB.
+2025-12-10 13:51:10,456 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 13:51:10,456 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 13:51:10,457 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 13:51:10,458 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 13:51:10,458 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 13:51:10,672 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 13:51:10,674 - __main__ - INFO - Données météo récupérées.
+2025-12-10 13:51:10,674 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 13:51:10,760 - transform - INFO - 64696 lignes de capteurs transformées.
+2025-12-10 13:51:47,792 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 13:51:47,792 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 13:51:47,792 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 13:51:47,792 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 13:51:47,807 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 12:51:00.
+2025-12-10 13:51:48,007 - extract_db - INFO - Étape 2/2 : 64696 mesures extraites de raw_measurements.
+2025-12-10 13:51:48,009 - __main__ - INFO - 64696 lignes brutes extraites de la DB.
+2025-12-10 13:51:48,009 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 13:51:48,009 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 13:51:48,010 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 13:51:48,010 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 13:51:48,010 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 13:51:48,178 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 13:51:48,179 - __main__ - INFO - Données météo récupérées.
+2025-12-10 13:51:48,179 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 13:51:48,214 - transform - INFO - 64696 lignes de capteurs transformées.
+2025-12-10 13:51:48,216 - transform - INFO - 62 lignes de production transformées.
+2025-12-10 13:51:48,229 - transform - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 13:51:48,229 - __main__ - INFO - 65094 lignes transformées avant consolidation.
+2025-12-10 13:51:48,277 - __main__ - INFO - 0 anomalies corrigées par les règles de qualité.
+2025-12-10 13:51:48,277 - __main__ - INFO - Total de 65094 enregistrements prêts à être chargés après nettoyage.
+2025-12-10 13:51:48,277 - __main__ - INFO - --- ÉTAPE 4 : Chargement des données (UPSERT) ---
+2025-12-10 13:51:51,497 - load - ERROR - Erreur lors de l'insertion
+Traceback (most recent call last):
+  File "/Users/zakariarhl/Documents/cours/collecter et gerer des données/project_pipline/scripts/load.py", line 76, in insert_measurements
+    execute_values(cur, sql, batch)
+  File "/Users/zakariarhl/Library/Python/3.9/lib/python/site-packages/psycopg2/extras.py", line 1299, in execute_values
+    cur.execute(b''.join(parts))
+psycopg2.errors.CardinalityViolation: ON CONFLICT DO UPDATE command cannot affect row a second time
+HINT:  Ensure that no rows proposed for insertion within the same command have duplicate constrained values.
+
+2025-12-10 13:51:51,503 - __main__ - ERROR - Erreur FATALE lors du chargement dans la DB : ON CONFLICT DO UPDATE command cannot affect row a second time
+HINT:  Ensure that no rows proposed for insertion within the same command have duplicate constrained values.
+
+2025-12-10 13:51:51,516 - __main__ - INFO - Rapport d'exécution final : {'start_time': '2025-12-10 13:51:47', 'status': 'COMPLETED_FAILURE', 'sources_extraites': {'db_sensor': 64696, 'csv_production': 62}, 'lignes_chargees': 0, 'lignes_transformees': 65094, 'anomalies_corrigees': 0, 'erreur_chargement': 'ON CONFLICT DO UPDATE command cannot affect row a second time\nHINT:  Ensure that no rows proposed for insertion within the same command have duplicate constrained values.\n', 'end_time': '2025-12-10 13:51:51', 'duration_seconds': 3.72}
+2025-12-10 13:51:51,516 - __main__ - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 13:53:02,946 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 13:53:02,947 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 13:53:02,947 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 13:53:02,947 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 13:53:02,966 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 12:53:00.
+2025-12-10 13:53:03,169 - extract_db - INFO - Étape 2/2 : 64692 mesures extraites de raw_measurements.
+2025-12-10 13:53:03,170 - __main__ - INFO - 64692 lignes brutes extraites de la DB.
+2025-12-10 13:53:03,170 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 13:53:03,170 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 13:53:03,176 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 13:53:03,177 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 13:53:03,177 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 13:53:03,320 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 13:53:03,321 - __main__ - INFO - Données météo récupérées.
+2025-12-10 13:53:03,321 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 13:53:03,352 - transform - INFO - 64692 lignes de capteurs transformées.
+2025-12-10 13:53:03,354 - transform - INFO - 62 lignes de production transformées.
+2025-12-10 13:53:03,366 - transform - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 13:53:03,366 - __main__ - INFO - 65090 lignes transformées avant consolidation.
+2025-12-10 13:53:03,416 - __main__ - INFO - 0 anomalies corrigées par les règles de qualité.
+2025-12-10 13:53:03,416 - __main__ - INFO - Total de 65090 enregistrements prêts à être chargés après nettoyage.
+2025-12-10 13:53:03,416 - __main__ - INFO - --- ÉTAPE 4 : Chargement des données (UPSERT) ---
+2025-12-10 13:53:06,946 - __main__ - INFO - Chargement terminé. 64710 enregistrements insérés/mis à jour.
+2025-12-10 13:53:06,947 - __main__ - INFO - Rapport d'exécution final : {'start_time': '2025-12-10 13:53:02', 'status': 'COMPLETED_SUCCESS', 'sources_extraites': {'db_sensor': 64692, 'csv_production': 62}, 'lignes_chargees': 64710, 'lignes_transformees': 65090, 'anomalies_corrigees': 0, 'end_time': '2025-12-10 13:53:06', 'duration_seconds': 4.0}
+2025-12-10 13:53:06,948 - __main__ - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline

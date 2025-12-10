@@ -9,20 +9,23 @@ Ce script coordonne toutes les étapes du flux de travail :
 3. Transformation et application des règles de qualité (conversion d'unités, nettoyage).
 4. Chargement des données dans la table cible 'consolidated_measurements' via l'opération UPSERT.
 5. Génération et affichage d'un rapport de synthèse.
+
+CORRECTION : Correction de l'appel à transform_sensor_rows et transform_production_rows 
+             pour correspondre à la signature qui ne prend qu'un seul argument.
 """
 
 # -----------------------
 # IMPORTS
 # -----------------------
 import logging
-import logging.handlers # Pour la gestion de la rotation des fichiers de log
+import logging.handlers 
 from pathlib import Path
 from datetime import datetime
-import sys # Pour les logs dans la console
+import sys 
 import shutil
 
 import yaml
-import pandas as pd
+import pandas as pd 
 
 from extract_csv import find_latest_csv, read_production_csv
 from extract_db import fetch_last_24h
@@ -31,6 +34,7 @@ from transform import (
     transform_production_rows,
     transform_sensor_rows,
     transform_api_rows,
+    enforce_schema, 
     quality_check 
 )
 from load import insert_measurements
@@ -42,208 +46,211 @@ from load import insert_measurements
 def load_config(path="config.yaml"):
     """
     Charge le fichier de configuration YAML à partir du chemin spécifié.
-
-    Args:
-        path (str): Chemin d'accès au fichier config.yaml.
-
-    Returns:
-        dict: Le contenu du fichier de configuration.
-
-    Raises:
-        FileNotFoundError: Si le fichier de configuration est introuvable.
-        ValueError: Si le fichier YAML est vide ou mal formé.
     """
     try:
-        with open(path, "r", encoding="utf-8") as f:
-            cfg = yaml.safe_load(f)
-            if not cfg:
-                raise ValueError("Fichier YAML vide")
-            return cfg
-    except FileNotFoundError:
-        raise FileNotFoundError(f"Fichier de configuration {path} introuvable")
-    except yaml.YAMLError as e:
-        raise ValueError(f"Erreur lors de la lecture du YAML : {e}")
+        config_path = path if Path(path).exists() else Path(__file__).parent.parent / path
+        with open(config_path, "r", encoding="utf-8") as f:
+            return yaml.safe_load(f)
+    except Exception as e:
+        # Erreur non-gérée, on la propage au bloc try/except de l'appelant
+        raise Exception(f"Erreur lors du chargement de la configuration: {e}")
 
 
 # -----------------------
-# CONFIGURATION LOGGING (CORRIGÉE : Console + Fichier)
+# CONFIGURATION DU LOGGING
 # -----------------------
 def setup_logging(cfg):
-    """Configure le logging pour écrire dans un fichier (avec rotation) et la console."""
-    log_dir = Path(cfg["paths"]["logs_dir"])
-    log_dir.mkdir(parents=True, exist_ok=True) # S'assure que le dossier 'logs' existe
-    log_file = log_dir / "pipeline.log"
+    """
+    Configure le système de logging pour écrire à la fois dans la console (stdout)
+    et dans un seul fichier 'pipeline.log' (en mode append).
+    """
     
-    logger = logging.getLogger() # Récupère le root logger (affecte tous les modules)
-    logger.setLevel(logging.INFO)
+    LOG_FILE_NAME = "pipeline.log"
+    logs_dir = cfg["paths"]["logs_dir"]
+    log_path = Path(logs_dir) / LOG_FILE_NAME
     
-    # Formatteur
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    # Assurer que le répertoire des logs existe
+    log_path.parent.mkdir(parents=True, exist_ok=True)
     
-    # Gestionnaire 1: Fichier (avec rotation)
-    file_handler = logging.handlers.RotatingFileHandler(
-        log_file,
-        maxBytes=10*1024*1024, # 10MB
-        backupCount=5,
-        encoding='utf-8'
+    # 1. Configuration de base pour la console (stdout)
+    # Configure les loggers existants pour stdout (niveau INFO)
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        stream=sys.stdout
     )
+    
+    # 2. Gestionnaire de fichiers pour pipeline.log
+    # Utilisation de FileHandler pour écrire en continu dans le même fichier
+    # mode='a' est essentiel pour ajouter au fichier existant
+    file_handler = logging.FileHandler(log_path, mode='a', encoding='utf-8')
+    file_handler.setLevel(logging.INFO)
+    
+    # Définir le format pour le fichier
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
     file_handler.setFormatter(formatter)
     
-    # Gestionnaire 2: Console (terminal)
-    console_handler = logging.StreamHandler(sys.stdout)
-    console_handler.setFormatter(formatter)
+    # S'assurer que le gestionnaire de fichiers est ajouté au logger racine
+    root_logger = logging.getLogger()
     
-    # Ajout des handlers (pour s'assurer qu'ils ne sont pas ajoutés plusieurs fois)
-    if not logger.handlers:
-        logger.addHandler(file_handler)
-        logger.addHandler(console_handler)
-        
-    return logging.getLogger("pipeline")
+    # S'assurer qu'aucun autre gestionnaire de fichiers n'est en place (pour éviter les doublons)
+    for handler in root_logger.handlers[:]:
+        if isinstance(handler, (logging.FileHandler, logging.handlers.RotatingFileHandler, logging.handlers.TimedRotatingFileHandler)):
+            root_logger.removeHandler(handler)
+            
+    root_logger.addHandler(file_handler)
+    
+    # Retourner le logger pour main_pipeline
+    return logging.getLogger(__name__)
 
 
-# -----------------------
-# CRÉATION DES DOSSIERS
-# -----------------------
-def ensure_dirs(cfg):
-    """Crée les dossiers temporaires, de logs et de données s'ils n'existent pas."""
-    logger = logging.getLogger("pipeline")
-    paths = cfg.get("paths")
-
-    for key, directory in paths.items():
-        if key.endswith("dir"):
-            Path(directory).mkdir(parents=True, exist_ok=True)
-            logger.info(f"Dossier créé ou déjà existant : {directory}")
-
-
-# -----------------------
-# PIPELINE COMPLET
-# -----------------------
+# ----------------------
+# FONCTION PRINCIPALE RUN
+# ----------------------
 def run():
-    """
-    Exécute le pipeline ETL complet de A à Z.
-
-    Coordonne les appels successifs aux modules d'extraction, de transformation 
-    et de chargement, gérant le flux de données entre chaque étape.
-    """
-    
-    # 0) Charger config
-    cfg = load_config()
-    
-    # 1) Configurer le logging et créer les dossiers
+    # 1) Configuration et Initialisation
+    try:
+        cfg = load_config()
+    except Exception as e:
+        print(f"\nFATAL ERROR: Impossible de charger la configuration. Cause : {e}", file=sys.stderr)
+        sys.exit(1)
+        
+    # Configuration du logging (Utilise la nouvelle fonction)
     logger = setup_logging(cfg) 
     
-    # NOTE : L'affichage initial de la bannière est conservé en print pour l'esthétique du terminal
-    print("=== Lancement du pipeline complet ===")
-    logger.info("Démarrage du pipeline ETL.") 
+    logger.info("Début de l'exécution du pipeline ETL EnergiTech")
 
-    # S'assurer que les répertoires existent (doit se faire APRES la config logging)
-    ensure_dirs(cfg) 
-    
-    active_turbines = set()
-
-    # 2) Extraction CSV (Production)
-    logger.info("-> Extraction du CSV (Production)")
-    prod_rows = pd.DataFrame()
-    prod_clean = []
-    try:
-        csv_path = find_latest_csv(cfg["paths"]["csv_input_dir"])
-        logger.info(f"Fichier CSV trouvé : {csv_path}")
-        prod_rows = read_production_csv(csv_path)
-        prod_clean = transform_production_rows(prod_rows.to_dict(orient="records"))
-        for p in prod_clean:
-            if p.get("turbine_id"): active_turbines.add(p["turbine_id"])
-    except FileNotFoundError as e:
-        logger.warning(f"Fichier CSV non trouvé, extraction ignorée. {e}")
-    except Exception:
-        logger.exception("Erreur inattendue lors de l'extraction CSV.")
-
-
-    # 3) Extraction DB (Capteurs)
-    logger.info("-> Extraction des capteurs depuis DB")
-    sensor_rows = fetch_last_24h(cfg["postgres"], cfg["pipeline"].get("lookback_minutes", 1440))
-    sensor_clean = transform_sensor_rows(sensor_rows) if sensor_rows else []
-    for s in sensor_clean:
-        if s.get("turbine_id"): active_turbines.add(s["turbine_id"])
-    
-    # Utilisation des turbines trouvées, ou par défaut si rien n'est trouvé.
-    active_turbines_list = list(active_turbines) if active_turbines else ["T001", "T002"]
-    logger.info(f"Turbines actives détectées : {', '.join(active_turbines_list)}")
-
-
-    # 4) Extraction API météo
-    logger.info("-> Extraction météo depuis l'API")
-    weather_clean = []
-    try:
-        weather_json = fetch_weather_open_meteo(
-            cfg["api"]["weather"]["base_url"],
-            cfg["api"]["weather"]["params"]
-        )
-        weather_clean = transform_api_rows(weather_json, active_turbines_list) 
-    except Exception:
-        logger.exception("Erreur lors de l'extraction météo. Les données météo seront manquantes.")
-
-
-    # 5) Transformation et Qualité
-    logger.info("-> Transformation et contrôle qualité des données")
-
-    # Combinaison de toutes les sources
-    combined = prod_clean + sensor_clean + weather_clean
-    logger.info(f"Total lignes brutes combinées : {len(combined)}")
-
-    # CORRECTION DE L'ERREUR : nb_anomalies reçoit directement l'entier
-    if combined:
-        cleaned_data, nb_anomalies = quality_check(combined) 
-    else:
-        cleaned_data, nb_anomalies = [], 0
-        
-    logger.info(f"Contrôle qualité terminé. Anomalies détectées/nettoyées : {nb_anomalies}")
-
-    # 6) Chargement en PostgreSQL
-    logger.info("-> Chargement en base PostgreSQL")
-    inserted = insert_measurements(cfg["postgres"], "consolidated_measurements", cleaned_data)
-
-    # 7) Résumé
+    start_time = datetime.now()
     summary = {
-        "timestamp": datetime.now().isoformat(),
-        "turbines_actives": len(active_turbines_list),
-        "csv_rows_lues": len(prod_rows) if prod_rows is not None else 0,
-        "sensor_rows_lus": len(sensor_rows),
-        "weather_rows_creees": len(weather_clean),
-        "inserted_rows": inserted,
-        "anomalies_corrigees": nb_anomalies
+        'start_time': start_time.strftime('%Y-%m-%d %H:%M:%S'),
+        'status': 'RUNNING',
+        'sources_extraites': {},
+        'lignes_chargees': 0
     }
 
-    # Affichage du rapport final dans la console
-    print("\n--- Pipeline terminé ---")
-    print(f"Rapport d'exécution:\n{yaml.dump(summary, indent=2)}")
+    # Créer le répertoire temporaire si nécessaire (pour les fichiers intermédiaires)
+    tmp_dir = Path(cfg["paths"]["tmp_dir"])
+    tmp_dir.mkdir(parents=True, exist_ok=True)
+    logger.info(f"Dossier temporaire créé/vérifié: {tmp_dir}")
     
-    # Log du rapport final
-    logger.info(f"Rapport d'exécution final : {summary}")
+    # 2) Extraction
+    # 2.1) Extraction DB (Capteurs)
+    try:
+        logger.info("--- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---")
+        sensor_rows = fetch_last_24h(cfg["postgres"], cfg["pipeline"]["lookback_minutes"])
+        summary['sources_extraites']['db_sensor'] = len(sensor_rows)
+        logger.info(f"{len(sensor_rows)} lignes brutes extraites de la DB.")
+    except Exception as e:
+        logger.error(f"Échec de l'extraction DB : {e}")
+        sensor_rows = []
 
-# Affichage du rapport final dans la console
-    print("\n--- Pipeline terminé ---")
-    print(f"Rapport d'exécution:\n{yaml.dump(summary, indent=2)}")
-    
-    # Log du rapport final
-    logger.info(f"Rapport d'exécution final : {summary}")
-    
-    # 8) Nettoyage des fichiers temporaires (Sécurité)
+    # 2.2) Extraction CSV (Production)
     try:
-        # Suppression récursive et sécurisée du répertoire temporaire
-        shutil.rmtree(cfg["paths"]["tmp_dir"])
-        logger.info(f"Nettoyage sécurisé du dossier temporaire: {cfg['paths']['tmp_dir']}")
-    except OSError as e:
-        # Utilisation de warning, car c'est un problème non fatal pour le chargement
-        logger.warning(f"Impossible de supprimer le dossier temporaire {cfg['paths']['tmp_dir']}: {e}")
-# -----------------------
+        logger.info("--- ÉTAPE 2.2 : Extraction des données production (CSV) ---")
+        csv_path = find_latest_csv(cfg["paths"]["csv_input_dir"], pattern_prefix='production_')
+        production_df = read_production_csv(csv_path)
+        production_rows = production_df.to_dict('records') # Convertir en liste de dict
+        summary['sources_extraites']['csv_production'] = len(production_rows)
+        logger.info(f"{len(production_rows)} lignes brutes extraites du CSV.")
+    except Exception as e:
+        logger.warning(f"Échec de l'extraction CSV (Production): {e}. Poursuite sans données CSV.")
+        production_rows = []
+
+    # 2.3) Extraction API (Météo)
+    try:
+        logger.info("--- ÉTAPE 2.3 : Extraction des données météo (API) ---")
+        weather_data = fetch_weather_open_meteo(cfg['api']['weather']['base_url'], cfg['api']['weather']['params'])
+        # Le nombre de lignes extraites sera calculé lors de la transformation
+        logger.info(f"Données météo récupérées.")
+    except Exception as e:
+        logger.warning(f"Échec de l'extraction API (Météo): {e}. Poursuite sans données Météo.")
+        weather_data = {}
+
+    # 3) Transformation
+    logger.info("--- ÉTAPE 3 : Transformation des données brutes ---")
+    
+    # 3.1) Transformation
+    # CORRECTION ICI : RETRAIT DE L'ARGUMENT 'db_sensor'
+    transformed_sensor = transform_sensor_rows(sensor_rows)
+    # CORRECTION ICI : RETRAIT DE L'ARGUMENT 'csv_production'
+    transformed_production = transform_production_rows(production_rows)
+    
+    # Liste des turbines actives (pour dupliquer les données météo)
+    active_turbines = set(r['turbine_id'] for r in transformed_sensor + transformed_production)
+    if not active_turbines:
+        logger.warning("Aucune turbine active trouvée dans les données capteurs/production pour l'application météo.")
+    
+    # L'API a besoin de la liste des turbines pour dupliquer les enregistrements météo
+    transformed_api = transform_api_rows(weather_data, list(active_turbines), 'api_weather')
+    
+    summary['lignes_transformees'] = len(transformed_sensor) + len(transformed_production) + len(transformed_api)
+    logger.info(f"{summary['lignes_transformees']} lignes transformées avant consolidation.")
+
+    # 3.2) Consolidation et Vérification
+    consolidated_records = transformed_sensor + transformed_production + transformed_api
+    
+    # Enforce schema pour garantir l'ordre et la complétude
+    consolidated_records = enforce_schema(consolidated_records)
+
+    # Application des règles de qualité
+    cleaned_records, anomalies_count = quality_check(consolidated_records)
+    summary['anomalies_corrigees'] = anomalies_count
+    logger.info(f"{anomalies_count} anomalies corrigées par les règles de qualité.")
+    logger.info(f"Total de {len(cleaned_records)} enregistrements prêts à être chargés après nettoyage.")
+
+    
+    # 4) Chargement
+    logger.info("--- ÉTAPE 4 : Chargement des données (UPSERT) ---")
+    inserted_count = 0
+    
+    try:
+        inserted_count = insert_measurements(
+            cfg["postgres"],
+            "consolidated_measurements",
+            cleaned_records,
+            batch_size=cfg.get("pipeline", {}).get("batch_size", 500)
+        )
+        summary['status'] = 'COMPLETED_SUCCESS'
+        summary['lignes_chargees'] = inserted_count
+        logger.info(f"Chargement terminé. {inserted_count} enregistrements insérés/mis à jour.")
+
+    except Exception as e:
+        logger.error(f"Erreur FATALE lors du chargement dans la DB : {e}")
+        summary['status'] = 'COMPLETED_FAILURE'
+        summary['erreur_chargement'] = str(e)
+        
+    finally:
+    # 5) Rapport et Nettoyage
+        
+        # Mise à jour du temps de fin
+        summary['end_time'] = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        duration = datetime.now() - start_time
+        summary['duration_seconds'] = round(duration.total_seconds(), 2)
+
+        print("\n=== Pipeline terminé ===")
+        print(f"Rapport d'exécution:\n{yaml.dump(summary, indent=2)}")
+        
+        # Log du rapport final
+        logger.info(f"Rapport d'exécution final : {summary}")
+        
+        # 6) Nettoyage des fichiers temporaires (Sécurité)
+        try:
+            # Suppression récursive et sécurisée du répertoire temporaire
+            shutil.rmtree(cfg["paths"]["tmp_dir"])
+            logger.info(f"Nettoyage sécurisé du dossier temporaire: {cfg['paths']['tmp_dir']}")
+        except OSError as e:
+            # Utilisation de warning, car c'est un problème non fatal pour le chargement
+            logger.warning(f"Impossible de supprimer le dossier temporaire {cfg['paths']['tmp_dir']}: {e}")
+
+# ----------------------
 # POINT D’ENTRÉE
-# -----------------------
+# ----------------------
 if __name__ == "__main__":
-    # Démarre la pipeline et attrape les erreurs fatales avant la configuration du logger
+    # Démarre la pipeline et attrape les erreurs fatales (si la config n'est même pas trouvable)
     try:
+        print("=== Lancement du pipeline complet ===")
         run()
     except Exception as e:
         # Affichage direct dans le terminal en cas d'échec critique (ex: config non trouvée)
         print(f"\nFATAL ERROR: Le pipeline a échoué. Cause : {e}", file=sys.stderr)
-        # Tente de logger l'exception au cas où le logger aurait été initialisé
-        logging.exception("Erreur FATALE (hors pipeline) survenue.")
+        sys.exit(1)
