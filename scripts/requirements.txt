@@ -1,0 +1,27 @@
+## 2. Création du `requirements.txt`
+
+Pour votre pipeline, les dépendances sont :
+
+* `psycopg2-binary` (pour la connexion à PostgreSQL)
+* `pandas` (pour la manipulation des données, notamment le CSV)
+* `PyYAML` (pour la lecture du fichier de configuration)
+* `requests` (pour les appels à l'API météo)
+* `python-dateutil` (pour le parsing robuste des dates)
+
+Pour la partie Streamlit, il faut ajouter :
+
+* `streamlit`
+* `altair`
+
+Voici le contenu de votre fichier **`requirements.txt`** :
+
+```text
+psycopg2-binary>=2.9.9
+pandas>=2.1.4
+PyYAML>=6.0.1
+requests>=2.31.0
+python-dateutil>=2.8.2
+streamlit>=1.29.0
+altair>=5.2.0
+tabulate>=0.9.0
+pytz>=2023.3.post1

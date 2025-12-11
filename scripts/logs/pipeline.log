@@ -1859,3 +1859,53 @@ HINT:  Ensure that no rows proposed for insertion within the same command have d
 2025-12-10 13:53:06,946 - __main__ - INFO - Chargement terminé. 64710 enregistrements insérés/mis à jour.
 2025-12-10 13:53:06,947 - __main__ - INFO - Rapport d'exécution final : {'start_time': '2025-12-10 13:53:02', 'status': 'COMPLETED_SUCCESS', 'sources_extraites': {'db_sensor': 64692, 'csv_production': 62}, 'lignes_chargees': 64710, 'lignes_transformees': 65090, 'anomalies_corrigees': 0, 'end_time': '2025-12-10 13:53:06', 'duration_seconds': 4.0}
 2025-12-10 13:53:06,948 - __main__ - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 14:25:10,698 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 14:25:10,698 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 14:25:10,698 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 14:25:10,698 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 14:25:10,720 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 13:25:00.
+2025-12-10 14:25:10,948 - extract_db - INFO - Étape 2/2 : 64628 mesures extraites de raw_measurements.
+2025-12-10 14:25:10,948 - __main__ - INFO - 64628 lignes brutes extraites de la DB.
+2025-12-10 14:25:10,948 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 14:25:10,949 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 14:25:10,952 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 14:25:10,952 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 14:25:10,952 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 14:25:11,119 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 14:25:11,120 - __main__ - INFO - Données météo récupérées.
+2025-12-10 14:25:11,120 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 14:25:11,148 - transform - INFO - 64628 lignes de capteurs transformées.
+2025-12-10 14:25:11,149 - transform - INFO - 62 lignes de production transformées.
+2025-12-10 14:25:11,162 - transform - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 14:25:11,162 - __main__ - INFO - 65026 lignes transformées avant consolidation.
+2025-12-10 14:25:11,211 - __main__ - INFO - 0 anomalies corrigées par les règles de qualité.
+2025-12-10 14:25:11,211 - __main__ - INFO - Total de 65026 enregistrements prêts à être chargés après nettoyage.
+2025-12-10 14:25:11,211 - __main__ - INFO - --- ÉTAPE 4 : Chargement des données (UPSERT) ---
+2025-12-10 14:25:13,204 - __main__ - INFO - Chargement terminé. 64646 enregistrements insérés/mis à jour.
+2025-12-10 14:25:13,204 - __main__ - INFO - Rapport d'exécution final : {'start_time': '2025-12-10 14:25:10', 'status': 'COMPLETED_SUCCESS', 'sources_extraites': {'db_sensor': 64628, 'csv_production': 62}, 'lignes_chargees': 64646, 'lignes_transformees': 65026, 'anomalies_corrigees': 0, 'end_time': '2025-12-10 14:25:13', 'duration_seconds': 2.51}
+2025-12-10 14:25:13,204 - __main__ - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
+2025-12-10 14:48:33,349 - __main__ - INFO - Début de l'exécution du pipeline ETL EnergiTech
+2025-12-10 14:48:33,349 - __main__ - INFO - Dossier temporaire créé/vérifié: /tmp/energitic_pipeline
+2025-12-10 14:48:33,349 - __main__ - INFO - --- ÉTAPE 2.1 : Extraction des données capteurs (DB) ---
+2025-12-10 14:48:33,349 - extract_db - INFO - Étape 1/2 : Génération de nouvelles mesures (simulé)
+2025-12-10 14:48:33,367 - extract_db - INFO - Génération et insertion réussies de 2 nouvelles mesures pour le timestamp: 2025-12-10 13:48:00.
+2025-12-10 14:48:33,568 - extract_db - INFO - Étape 2/2 : 64582 mesures extraites de raw_measurements.
+2025-12-10 14:48:33,568 - __main__ - INFO - 64582 lignes brutes extraites de la DB.
+2025-12-10 14:48:33,568 - __main__ - INFO - --- ÉTAPE 2.2 : Extraction des données production (CSV) ---
+2025-12-10 14:48:33,569 - extract_csv - INFO - Fichier CSV sélectionée : data/production_2025_12.csv
+2025-12-10 14:48:33,572 - extract_csv - INFO - 62 lignes lues depuis data/production_2025_12.csv
+2025-12-10 14:48:33,573 - __main__ - INFO - 62 lignes brutes extraites du CSV.
+2025-12-10 14:48:33,573 - __main__ - INFO - --- ÉTAPE 2.3 : Extraction des données météo (API) ---
+2025-12-10 14:48:33,755 - extract_api - INFO - Météo récupérée — status 200
+2025-12-10 14:48:33,756 - __main__ - INFO - Données météo récupérées.
+2025-12-10 14:48:33,756 - __main__ - INFO - --- ÉTAPE 3 : Transformation des données brutes ---
+2025-12-10 14:48:33,791 - transform - INFO - 64582 lignes de capteurs transformées.
+2025-12-10 14:48:33,793 - transform - INFO - 62 lignes de production transformées.
+2025-12-10 14:48:33,806 - transform - INFO - Météo dupliquée pour 2 turbines : 336 lignes.
+2025-12-10 14:48:33,806 - __main__ - INFO - 64980 lignes transformées avant consolidation.
+2025-12-10 14:48:33,855 - __main__ - INFO - 0 anomalies corrigées par les règles de qualité.
+2025-12-10 14:48:33,855 - __main__ - INFO - Total de 64980 enregistrements prêts à être chargés après nettoyage.
+2025-12-10 14:48:33,855 - __main__ - INFO - --- ÉTAPE 4 : Chargement des données (UPSERT) ---
+2025-12-10 14:48:36,966 - __main__ - INFO - Chargement terminé. 64600 enregistrements insérés/mis à jour.
+2025-12-10 14:48:36,967 - __main__ - INFO - Rapport d'exécution final : {'start_time': '2025-12-10 14:48:33', 'status': 'COMPLETED_SUCCESS', 'sources_extraites': {'db_sensor': 64582, 'csv_production': 62}, 'lignes_chargees': 64600, 'lignes_transformees': 64980, 'anomalies_corrigees': 0, 'end_time': '2025-12-10 14:48:36', 'duration_seconds': 3.62}
+2025-12-10 14:48:36,967 - __main__ - INFO - Nettoyage sécurisé du dossier temporaire: /tmp/energitic_pipeline
